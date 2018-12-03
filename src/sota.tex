@@ -1,0 +1,125 @@
+\section{State-of-the-art}\label{sec:sota}
+
+\subsection{intro RAL}
+Advances  in  autonomous  robotics  are  gradually  enabling deployment of robots in human-populated environments \cite{hawes2017strands}.
+ Human activity tends to cause changes to the environments it  takes  place  in,  and  the  mobile  robots  that  share  these environments need to be able to cope with such never-ending changes.
+ However, merely coping is not enough – ideally, a mobile  robot  should  not  only  be  able  to  comprehend  the environment  structure,  but  also  understand  how  it  changes over time.
+ Many authors have shown that even simple models of the environment that adapt to changes improve the overall ability  of  mobile  robots  to  operate  over  longer  time  peri- ods \cite{biber2009experimental}, \cite{tipaldi2013lifelong}, \cite{kucner2013conditional}, \cite{krajnik2017fremen}, \cite{churchill2013experience}.
+ Moreover, the ability of long-term autonomous  operation  improves  the  chances  of  observing the  temporal  changes,  and  thus  to  extract  more  valuable information  about  the  environment  dynamics,  resulting  in more accurate spatio-temporal models \cite{hawes2017strands}.
+
+ Our  approach  proposes  to  extend  spatial  representations by  adding  several  dimensions  representing  time,  with  each pair of temporal dimensions representing a given periodicity observed  in  the  gathered  data.
+  In  particular,  we  employ the  Frequency  Map  Enhancement  \cite{krajnik2017fremen}  concept  to  identify (temporally)  periodic  patterns  in  the  data  gathered.
+  This approach  represents  periodic  processes  in  the  environment using  Fourier  analysis,  and  the  resulting  spectral  models obtained  from  long-term  experience  can  be  used  to  predict future  environment  states.
+  Then,  we  transform  each  time periodicity  into  a  pair  of  dimensions  that  form  a  circle in  2d space  and  add  these  dimensions  to  the  vectors  that represent  the  spatial  aspects  of  the  modelled  phenomena.
+ The  model  itself  is  then  built  using  traditional  techniques like clustering or expectation-maximisation over the warped space-hypertime  representation.
+  The  resulting  multi-modal model represents both the structure of the space and temporal patterns of the changes or events.
+ We hypothesize that since the  proposed  model  respects  the  spatio-temporal  continuity of the modelled phenomena, it provides more accurate pre- dictions  than  models  that  partition  the  modeled  space  into discrete  elements.
+  In  this  paper,  we  provide  a  description of the proposed method, and provide experimental evidence of its capability to efficiently represent spatio-temporal data and  to  predict  future  states  of  the  environment.
+  Unlike  the previous  works  \cite{tipaldi2013lifelong},  \cite{rosen2016towards},  \cite{kucner2013conditional},  \cite{krajnik2017fremen},  which  can  only  introduce time  into  models  that  represent  the  environment  by  a  dis- crete  set  of  binary  states,  such  as  visibility  of  landmarks or  cell  occupancy  in  grids,  our  method  is  able  to  work with continuous and higher-dimensional variables, e.g. robot velocities, object positions, pedestrian flows, etc.
+ Moreover, the  method  explicitly  represents  and  predicts  not  only  the value  of  a  given  state,  but  also  its  probabilistic  distribution at  a  particular  time  and  location,  which  can  be  useful  for task scheduling and planning \cite{mudrova2015integrated}.
+
+ Our experiments, based on real world data gathered over several weeks, confirm that the method achieved more accu- rate predictions than both static models and models that aim to represent time over a discretised space only.
+ 
+
+\subsection{sota RAL}
+
+
+ In  mobile  robotics,  the  effects  of  environment  variations were  studied  mainly  from  the  perspective  of  localisation and  mapping,  because  neglecting  the  environment  change gradually  deteriorates  the  ability  of  the  robot  to  determine its position reliably and accurately.
+ Assuming that the world is non-stationary, the authors of \cite{biber2009experimental}, \cite{milford2010persistent}, \cite{konolige2009towards}, \cite{hochdorfer2009towards}, \cite{churchill2013experience} pro- posed approaches that create, refine and update world models in  a  continuous  manner.
+  Furthermore,  Ambrus  et  al. \cite{ambrucs2014meta} demonstrated  that  the  ability  of  continuous  remapping  not only   allows   to   refine   models   of   the   static   environment structure,  but  also  opens  up  the  possibility  to  learn  object models from the spatial changes observed \cite{faulhammer2017autonomous}.
+
+ Unlike  the  aforementioned  works,  which  focused  on  the spatial  structure  and  appearance  aspects  of  the  changes observed,  other  authors  \cite{biber2009experimental},  \cite{arbuckle2002temporal},  \cite{dayoub2011long},  \cite{tipaldi2013lifelong},  \cite{krajnik2017fremen}  focused  on modelling  the  temporal  aspects.
+  For  example,  \cite{biber2009experimental}  and  \cite{arbuckle2002temporal} represent  the  environment  dynamics  by  multiple  temporal models  with  different  timescales,  where  the  best  map  for localisation  is  chosen  by  its  consistency  with  current  readings. Dayoub et al. \cite{dayoub2011long} and Rosen et al. \cite{rosen2016towards} used statistical methods  to  create  feature  persistence  models  and  reasoned about  the  stability  of  the  environmental  states  over  time.
+ Tipaldi et al. \cite{tipaldi2013lifelong} proposed to represent the occupancy of cells in a traditional occupancy grid with a Hidden Markov Model.
+ Krajnik  et  al. \cite{krajnik2017fremen}  represent  the  probability  of  environment states  in  the  spectral  domain,  which  captures  cyclic  (daily, weekly, yearly) patterns of environmental changes as well as their persistence.
+
+ The  aforementioned  approaches  demonstrated  that  con- sidering  temporal  aspects  (and  especially  their  persistence and periodicity) in robotic models improves not only mobile robot  localisation  \cite{krajnik2017fremen},  \cite{tipaldi2013lifelong},  \cite{biber2009experimental},  but  also  planning  \cite{fentanes2015now},  \cite{krajnik2015s} and  exploration  \cite{santos2016lifelong}.
+  However,  these  temporal  representa- tions were tailored to model the probability of a single state over time, and thus were applied only to individual compo- nents  of  the  discretised  models,  e.g. cells  in  an  occupancy grid  \cite{tipaldi2013lifelong},  \cite{santos2016lifelong},  visibility  of  landmarks  \cite{krajnik2017fremen},  traversability  of edges  in  topological  maps  \cite{fentanes2015now}  or  human  presence  in  a particular  room  \cite{krajnik2015s}.
+  Since  the  spatial  interdependence  of these  components  was  neglected,  the  above  models  were actually considering only temporal and not spatial-temporal relations  of  the  represented  environments.
+  This  results  not only  in  memory  inefficiency  (because  of  the  necessity  to model  a  high  number  of discrete  states  separately)  but  also in the inability of the representation to estimate environment states  at  locations  where  no  measurements  were  taken,  e.g. if  a  certain  cell  in  an  occupancy  grid  is  occluded,  its  state is  unknown  even  if  the  neighbouring  cells  are  occupied, because the cell is part of a wall or ground.
+
+ Spatio-temporal relations of discrete environment models were investigated in \cite{santos2016lifelong}, \cite{wang2014modeling}.
+ Kuczner et al. \cite{santos2016lifelong} proposed to model how the occupancy likelihood of a given cell in a grid is influenced by the neighbouring cells and showed that this representation allows to model object movement directly in  an  occupancy  grid.
+  A  similar  approach  was  proposed in  \cite{wang2014modeling},  where  the  direction  of  traversal  over  each  cell  is obtained using an input-output Hidden Markov Model con- nected to neighboring cells.
+ However, these models represent only local spatial dependencies and suffer from a major dis- advantage  of the  discretised  models –  memory  inefficiency.
+ Therefore,  in  their  latest  work,  \cite{kucner2017enabling}  model  a  given  set  of spatio-temporal phenomena (the motion of people and wind flow) in a continuous domain, building their model by means of Expectation Maximisation.
+ Moreover, \cite{palmieri2017kinodynamic} shows how to use this representation for robot motion planning in crowded environments.
+
+ O’Callaghan  and  Ramos  \cite{o2012gaussian}  also  argue  in  favour  of continuous  models,  showing  the  advantages  of  Gaussian Mixture-based representations in terms of memory efficiency and utility for mobile robot navigation.
+ In their latest work, \cite{ramos2016hilbert} speed up building and updating of the proposed models by using an elegant combination of kernels and optimization methods.
+  The  speed-up  achieved  allows  to  recalculate  the model  relatively  quickly,  which  keeps  the  model  updated with the changes in the robot’s operational environment.
+
+ Unlike  the  work  of  Ramos  et  al. \cite{ramos2016hilbert},  which  is  aimed primarily at modelling the spatial structure, and \cite{kucner2017enabling}, which aims to make short-term predictions of the motion of people, our aim is to create universal, spatial-temporal models capa- ble of long-term predictions of various phenomena.
+ Inspired by the ability of the continuous models \cite{ramos2016hilbert}, \cite{kucner2017enabling} to represent spatio-temporal phenomena and the predictive power of spec- tral  representations  \cite{krajnik2017fremen},  we  propose  a  novel  method  which allows  to  introduce  the  notion  of  time  into  state-of-the-art spatial models used in mobile robotics.
+ Unlike our previous work  \cite{krajnik2017fremen},  which  treats  environmental  states  as  independent despite  their  spatial  proximity  and  is  applicable  to  binary states only, the proposed method can be applied to continu- ous, multi-dimensional representations, e.g. object positions, movements of people, gas concentration, etc.
+ Moreover, the method explicitly represents and predicts not only the value of  a  given  state,  but  also  its  probabilistic  distribution  at  a particular  time  and  location,  which  can  be  useful  for  task scheduling and planning.
+
+\subsection{intro mesas}
+
+
+Autonomous patrolling robots or monitoring sensor networks in general should be able to correctly detect anomalous behaviour of agents.
+This goal  is usually achieved by using complicated rule base created by an expert, but we believe that this goal should be achieved through the self learning of an autonomous system.
+We present a method, that can create a model of changes in human populated environments based on the past observations, and decide, what is anomalous compared to its previous experience.
+
+As the robots gradually attain the ability of long-term operation, they not only encounter new challenges due to the fact that the environment changes over time~\cite{krajnik2016persistent,krajnik2014long}, but by interpreting these changes, they also get new opportunities to learn not only the environment structure, but also its dynamics~\cite{hawes2017strands,kunze2018artificial}. 
+However, a robot, which continuously operates withing a given environment, can learn the environment dynamics within a few days and after that, new observations typically conform to the already-created model and do not bring significant additional information~\cite{krajnik2017fremen,coppola2016learning}. 
+Thus, to refine the environment model, a robot should be able to determine (or even predict), that a given observation is or will be novel, unusual or anomalous.
+The ability to detect and predict anomalous situations thus significantly contributes to the quality of the robot environment model and therefore to the efficiency of its operation~\cite{santos2017spatio,santos2016lifelong,hanheide2017and}. 
+Furthermore, detecting anomalous situations is often required in cases that the robot is deployed in security-related scenarios~\cite{hawes2017strands}. 
+Since the environmental changes observed indoors are typically caused by people, detection of anomalous situations is closely tied to modelling the human behaviour. 
+
+The aim of our method is to create a model of human presence in the patrolling robot operational area.
+Such a model has to predict the regular behaviour and incorporate the detection of anomalous events. 
+Anomalous events, outliers in data, and novelties in streams of data are defined only vaguely as measurements, that are somehow strange -- unexpected, inconsistent, suspicious, or rare -- compared to the previous experience of a human observer \cite{grubbs1969procedures}, \cite{barnett1974outliers} and there are many approaches to solve different scenarios in different scientific fields \cite{ilango2012five}. 
+In our case, we use the outlier detection based on the model \cite{rousseeuw2005robust}. 
+Our model is a function that estimates the Bernoulli distribution \cite{evans20004} of occurrences over the time line -- similarly to FreMEn model \cite{krajnik2014spectral,krajnik2017fremen,coppola2016learning}.
+
+%bernoulli distribution (podivat se na fremena, co se tam pise)
+
+For the time dependent events prediction we usually use methods for time series forecasting.
+The time series forecasting understands time-dependent events as a combination of three components that can be analysed separately - a trend, seasonal and cyclic patterns \cite{hyndman2018forecasting}.
+The trend describes long-term increase or decrease in data, seasonal patterns describe periodical changes in data and cyclic patterns are fluctuations in data with unknown periodicity.
+In the proposed method we assume that it is possible to neglect the trend and cyclic patterns due to the nature of the studied problem, where the environmental changes are induced directly by human routines and habits.
+%Moreover, the cyclic fluctuations are usually hard to predict using scientific methods due to the unknown nature of its generator.
+Therefore, our model is derived from periodical patterns, that explain the majority of events in human populated environment. 
+Using the time series forecasting with neglected trend to analyse the time dependent human behaviour patterns was firstly introduced in \cite{krajnik2017fremen} and it demonstrated its efficiency in different robotic applications and scenarios \cite{santos2017spatio,krajnik2015s,santos2016lifelong}.
+
+Contrary to usual approach of modelling multiple seasonalities, where individual patterns are analysed separately \cite{gould2008forecasting}, we create a special vector space, that reflects every selected seasonality, project the time series into it, and then analyse the periodical features of human behaviour in that space, see Fig.~\ref{fig:hypertime}.
+For every seasonal pattern we create extra two dimensions and project the time series into a circle on that plane in the way that every measurement from the same position relative to the periodicity is on the same position on the circle.
+The proposed projection then reflects not only the seasonality derived from the structure of the vector space, but also the continuity derived from a circularity of the projection.
+
+
+\subsection{intro eccv}
+
+
+The technology has reached the state where autonomous service robots are deployed for extended time periods in human populated environments, where they assist people in their daily chores~\cite{hawes2017strands} or help those who need special care \cite{hebesberger2017patterns}. 
+
+\cite{hawes2017strands} describes development of robots, which were deployed for long-term in several different scenarios.
+In one of the described scenarios, a mobile info-terminal is supposed to offer information to clients of a care home.
+For example, the robot displays a lunch menu near a cafeteria or provides directions to visitors around the care home lobby.
+In both cases, the robot should reach a given spot before the people arrive there to utilise the information provided.
+This is not only to provide the information on time, but to avoid problems when navigating between people and causing nuisance by crossing their path.  
+\cite{hawes2017strands,hanheide2017and} proved that a robot that is able to anticipate human behaviour and schedule its services accordingly accomplishes richer interactions with humans and is considered to be more helpful by the humans it shares its space with.  
+However, the study~\cite{hanheide2017and} pre-determined the locations the robot was providing its services at and allowed it to only select the time it will provide those services.
+As concluded by~\cite{hanheide2017and}, it would be useful to allow the robot to choose the locations as well according to the typical areas the people presence.
+This requires a mobile robot to learn a spatio-temporal model that can predict the likelihood of people occurrence in different locations and times. 
+
+Since the planning, localisation and navigation components of most indoor mobile robots represent the robot operational space by means of an occupancy grid~\cite{elfes1989using}, most robotics researchers aimed to incorporate information about human-induced environment dynamics into occupancy grid models.
+For example, the work of Kuczner \cite{kucner2013conditional} assumes that changes in occupancy are caused by moving objects and attempts to encode typical motion patterns into the grid.
+In particular, \cite{kucner2013conditional} proposes to associate each cell with a probabilistic model, which can predict the occupancy of the neighbouring cells depending on the direction an object passed through the given cell.  
+A similar approach to the model generation is proposed in \cite{wang2014modeling}, where the direction of the traversal over each cell is obtained using an input-output hidden Markov model connected to neighbouring cells.
+Another approach~\cite{molina2018modelling} associates each cell with a set of temporal models, which predict the direction of people movement at a particular time.
+These temporal models are based on an approach presented in \cite{krajnik2014spectral} and \cite{krajnik2017fremen}, which efficiently retrieves and represents periodic behaviour of changes caused by humans by employing spectral analysis.
+In \cite{krajnik2017fremen}, the model is applied to occupancy grids and can predict cell occupancies for a particular time. 
+During the measurement of human appearance the system simply models the cell occupancies by a set of harmonic functions that capture long-term patterns of the changes observed.
+
+
+The primary problem of grid-based models is not only their memory inefficiency (because of the necessity to model a high number of discrete states separately), but also the necessity to obtain measurements at all the cells which are supposed to be modeled. 
+In \cite{o2012gaussian}, authors argue that the continuous models are of better use for robot navigation than the discrete ones.
+They employ data provided by a range finding sensor, which identifies not only the occurrence of humans and other objects, but allows to determine which space is empty.
+Using this method the two categories of observations (empty and occupied) allow to employ a classification method with sigmoid based output.
+Later work \cite{ramos2016hilbert} speeds up model building by using an elegant combination of kernels and optimisation methods.
+The speedup achieved by combination of these methods allows to recalculate the model on a frequent basis, but the model itself does not represent temporal domain.
+In \cite{kucner2017enabling}, the authors incorporate the environment dynamics into continuous model, estimated by Expectation Maximization.
+Moreover, \cite{kucner2017enabling} suggests to use this continuous probabilistic directional map to plan robot paths through the space in accordance to the directions imposed by the movement of human crowds.
+Unlike the aforementioned works, which are aimed primarily at modeling the spatial distribution of objects or aim to predict their motion to support robot path planning, we aim to build a model capable of long-term prediction of people presence, which should be able to support scheduling of robot services. 

@@ -1,0 +1,380 @@
+%\usepackage[left=1.7cm,right=1.7cm,top=1.1cm,bottom=2cm]{geometry}
+\usepackage[left=3.0cm,right=2.4cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[cmyk,table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{caption}
+%\usepackage{subcaption}
+
+\usepackage{url}
+\usepackage{epstopdf}
+
+
+\usepackage{multirow}
+
+\usepackage[absolute]{textpos}
+%%Definice barev
+
+\definecolor{cvutcolor}{cmyk}{1, 0.43, 0, 0} %modra CVUT
+%\definecolor{cvutcolor}{cmyk}{0, 0.78, 0.78, 0.31} %karminova
+%\definecolor{cvutcolor}{cmyk}{0.31, 0, 1, 0.27} %zelena
+%\definecolor{cvutcolor}{cmyk}{0, 0.35, 1, 0.11} %zlata
+\definecolor{svetlemodra}{cmyk}{0.2, 0.08, 0, 0.1} % světle modra CVUT
+\definecolor{svetleseda}{cmyk}{0, 0, 0, 0.13} %světle šedá CVUT
+
+%%Okraje stranky
+\usepackage{lastpage}
+%\usepackage{a4wide}
+%\usepackage{geometry}
+%\usepackage{layout}
+%\geometry{
+%  includeheadfoot,
+%  margin=2.54cm
+%}
+
+%%Definice velikosti
+\newlength{\titlewidth}
+\setlength{\titlewidth}{\textwidth}
+\addtolength{\titlewidth}{-1.7cm}
+\newlength{\heightofhw}
+
+%%Uvodni stranka
+\newcommand{\TitlePage}[2]{{
+	\thispagestyle{empty}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{\textheight}}
+	{\parbox[0][\textheight][t]{\titlewidth}{
+		\sffamily 
+		%\vspace{1pt}
+		\includegraphics[height=4.1cm]{fig/logo_cvut_en_inv}\\[1em]
+		%\put(10,40){\parbox{8cm}{\Large Czech\\ Technical\\ University\\ in Prague}}		
+		\textbf{\Large 
+			\color{cvutcolor} Faculty of Electrical Engineering \\[0.3em]
+			\color{black} Department of Computer Science
+		}\\[11em]
+		\color{black}{\Large \textbf{Doctoral thesis proposal}}\\[0.8em]
+		{\huge \textbf{#2}}\\[0.8em]
+		\color{cvutcolor}{\Large \textbf{#1}}\\[0.8em]
+		\vfill{}
+		\textbf{\Large Prague, December 2018}
+		\vspace{2pt}
+	}}
+	\newpage
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PAGESTYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%definition of pagestyle - normal text - blue header text, blue line pagenumber 
+\fancypagestyle{pagestyle_text}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyfoot[CO]{
+		\thepage$/$\pageref*{LastPage}
+		}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[RE,LO]{}
+	\fancyfoot[CE]{
+		\thepage$/$\pageref*{LastPage}
+		}	
+}
+
+%%definition of pagestyle with part heading - no header text, blue line pagenumber
+\fancypagestyle{pagestyle_chapter}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyfoot[RO]{
+		\thepage$/$\pageref*{LastPage}
+		}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[RE,LO]{}
+	\fancyfoot[LE]{
+		\thepage$/$\pageref*{LastPage}
+		}
+}
+
+%%definition of pagestyle with vertical blue ruler on the left side
+\fancypagestyle{pagestyle_blue_rule}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[L]{
+		\hspace{-1cm}
+		\begin{tikzpicture}
+		\color{cvutcolor} \draw [line width=0.35cm] (0,-1) -- (0,-1.06\textheight);
+		\end{tikzpicture}
+		\vspace{-1.06\textheight}
+	}
+	\fancyfoot[C]{\thepage \qquad \qquad \qquad}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OTHER OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%definition of hyperlinks in the text
+\usepackage[
+	bookmarks=true,
+	hypertexnames=false,
+	breaklinks=true,
+	colorlinks=false,
+	urlcolor=blue,
+	linktoc=section,
+	linkbordercolor={1 0.8 0},
+	citebordercolor={0.36 0.54 0.76}%cyan%{0 0.68 0.84}%{0 0.36 0.72}%{0 1 0}
+]{hyperref}
+
+
+%% PDF properties
+\hypersetup{  
+	pdfauthor={\Author},
+	pdftitle={\Title},
+%	pdfsubject={\Subject},
+%	pdfkeywords={\Keywords}
+}
+
+%redefinition of part(sffamily vertical blue rule)
+\makeatletter
+\let\stdpart\part
+\renewcommand*\part{%
+  \@ifstar{\starpart}{\@dblarg\nostarpart}}
+\newcommand*\starpart[1]{
+	\thispagestyle{pagestyle_chapter}
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{\sffamily #1}}}}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.3\heightofhw}}
+	{\parbox[0][3cm][c]{\titlewidth}{
+		\stdpart*{{\sffamily #1}}
+	}}\\[1cm]
+  	\sectionmark{#1}
+  	\addcontentsline{toc}{part}{\sffamily{\hspace{1.5em}#1}}
+}
+\def\nostarpart[#1]#2{
+	\thispagestyle{pagestyle_chapter}
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{Part X\\ \textbf{\sffamily #2}}}}}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.5\heightofhw}}
+	\parbox{\titlewidth}{
+  		\stdpart[{#1}]{{\sffamily #2}}
+  	}\\[1cm]
+  	\sectionmark{#2}
+}
+\makeatother
+
+%definition of numbering - numbers are going in order Section.Subsection.Subsubsection...
+\makeatletter
+\@addtoreset{section}{part} %reseting section counter with every chapter
+
+\renewcommand\thepart{\sffamily\arabic{part}}
+\renewcommand\thesection{\sffamily\arabic{section}}
+\renewcommand\thesubsection{\thesection.\sffamily\arabic{subsection}}
+\makeatother
+
+%formating of the table of content
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{2em}}		%tab of sections
+\renewcommand*\l@subsection{\@dottedtocline{2}{2em}{2.7em}}	%tab of subsections 4.2 = 2.2 + 2 from the previous line
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{4.7em}{3.6em}}%tab of subsubsections 6.9 = 4.2 + 2.7 from the previous line
+\makeatother
+
+
+%redefinition for vertical blue rule before sections and subsections .. NEVER ever try to modify this part of code :D
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries\sffamily}}
+\newcommand{\vertrule}{\hspace{0cm}{\color{cvutcolor}\rule{0.35cm}{0.8em}}\hspace{0.5cm}}
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+    \begingroup
+      #6{%
+        \@hangfrom{\vertrule \hskip #3\relax\@svsec}%
+          \interlinepenalty \@M #8\@@par}%
+    \endgroup
+    \csname #1mark\endcsname{#7}%
+    \addcontentsline{toc}{#1}{%
+      \ifnum #2>\c@secnumdepth \else
+        \protect\numberline{\csname the#1\endcsname}%
+      \fi
+      #7}%
+  \else
+    \def\@svsechd{%
+      #6{\vertrule \hskip #3\relax
+      \@svsec #8}%
+      \csname #1mark\endcsname{#7}%
+      \addcontentsline{toc}{#1}{%
+        \ifnum #2>\c@secnumdepth \else
+          \protect\numberline{\csname the#1\endcsname}%
+        \fi
+        #7}}%
+  \fi
+  \@xsect{#5}}
+  
+\def\@ssect#1#2#3#4#5{\@tempskipa #3\relax
+  \ifdim \@tempskipa>\z@
+     %\begingroup #4\@hangfrom{\hskip #1}{\interlinepenalty \@M #5\par}\endgroup
+     % The IEEE does not block indent the section title text, it flows like normal
+     \begingroup \noindent #4{\relax{\vertrule \hskip #1}{\interlinepenalty \@M #5\@@par}}\endgroup
+  % svsechd swallows the trailing space, protect it with \mbox{}
+  \else \def\@svsechd{#4{\vertrule \hskip #1\relax #5\@IEEEsectpunct\mbox{}}}\fi
+  \@xsect{#3}}
+
+\makeatother
+
+  
+%%
+%%%%definition of pagestyle - normal text - blue header text, blue line pagenumber 
+%%\fancypagestyle{pagestyle_text}{
+%%	\fancyhead{}
+%%	\fancyfoot{}
+%%	\fancyfoot[RO]{\color{cvutcolor}\rule{\textwidth}{0pt}%
+%%		\put(-40,0){\parbox{10cm}{\color{cvutcolor}\rule{10cm}{1cm}}%
+%%		\hspace{-97mm}\parbox{97mm}{\color{white}\textbf{\thepage$/$\pageref*{LastPage}}}}}
+%%	\renewcommand{\headrulewidth}{0pt}
+%%	\fancyfoot[RE,LO]{}
+%%	\fancyfoot[LE]{
+%%		\color{cvutcolor}\rule{\textwidth}{0pt}%
+%%		\put(-690,0){\parbox{10cm}{\color{cvutcolor}\rule{10cm}{1cm}}
+%%		\hspace{-15mm}\parbox{37mm}{\color{white}\textbf{\thepage$/$\pageref*{LastPage}}}}
+%%		}
+%%	
+%%	\fancyhead[RO]{\color{cvutcolor} \slshape \leftmark}
+%%	\fancyhead[RE]{}
+%%	\fancyhead[LE]{\color{cvutcolor} \slshape \leftmark}
+%%	\fancyhead[LO]{}
+%%	
+%%}
+%%
+%%%%definition of pagestyle with part heading - no header text, blue line pagenumber
+%%\fancypagestyle{pagestyle_chapter}{
+%%	\fancyhead{}
+%%	\fancyfoot{}
+%%	\fancyfoot[RO]{\color{cvutcolor}\rule{\textwidth}{0pt}%
+%%		\put(-40,0){\parbox{10cm}{\color{cvutcolor}\rule{10cm}{1cm}}%
+%%		\hspace{-97mm}\parbox{97mm}{\color{white}\textbf{\thepage$/$\pageref*{LastPage}}}}}
+%%	\renewcommand{\headrulewidth}{0pt}
+%%	\fancyfoot[RE,LO]{}
+%%	\fancyfoot[LE]{
+%%		\color{cvutcolor}\rule{\textwidth}{0pt}%
+%%		\put(-690,0){\parbox{10cm}{\color{cvutcolor}\rule{10cm}{1cm}}
+%%		\hspace{-15mm}\parbox{37mm}{\color{white}\textbf{\thepage$/$\pageref*{LastPage}}}}
+%%		}
+%%}
+%%
+%%%%definition of pagestyle with vertical blue rule on the left side
+%%\fancypagestyle{pagestyle_blue_rule}{
+%%	\fancyhead{}
+%%	\fancyfoot{}
+%%	\fancyhead[L]{
+%%		\hspace{-1cm}
+%%		\begin{tikzpicture}
+%%		\color{cvutcolor} \draw [line width=0.35cm] (0,-1) -- (0,-1.06\textheight);
+%%		\end{tikzpicture}
+%%		\vspace{-1.06\textheight}
+%%	}
+%%	\fancyfoot[C]{\thepage \qquad \qquad \qquad}
+%%	\renewcommand{\headrulewidth}{0pt}
+%%}
+%%
+%%%%definition of hyperlinks in the text
+%%\usepackage[
+%%	bookmarks=true,
+%%	hypertexnames=false,
+%%	breaklinks=true,
+%%	colorlinks=false,
+%%	urlcolor=blue,
+%%	linktoc=section,
+%%	linkbordercolor={1 0.8 0},
+%%	citebordercolor={0.36 0.54 0.76}%cyan%{0 0.68 0.84}%{0 0.36 0.72}%{0 1 0}
+%%]{hyperref}
+%%
+%%
+%%%%vlastnosti PDF
+%%\hypersetup{  
+%%	pdfauthor={\Author},
+%%	pdftitle={\Title},
+%%%	pdfsubject={\Subject},
+%%%	pdfkeywords={\Keywords}
+%%}
+%%
+%%   
+%%%redefinition of part(sffamily vertical blue rule)
+%%\AtBeginDocument{\renewcommand{\partname}{\sffamily Part}}
+%%\makeatletter
+%%\renewcommand \thepart {\@Roman\c@part}
+%%\let\stdpart\part
+%%\renewcommand*\part{%
+%%  \@ifstar{\starpart}{\@dblarg\nostarpart}}
+%%\newcommand*\starpart[1]{
+%%	\thispagestyle{pagestyle_chapter}
+%%	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{\sffamily #1}}}}
+%%	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.3\heightofhw}}
+%%	{\parbox[0][3cm][c]{\titlewidth}{
+%%		\stdpart*{{\sffamily #1}}
+%%	}}\\[1cm]
+%%  	\sectionmark{#1}
+%%  	\addcontentsline{toc}{part}{\sffamily{\hspace{1.5em}#1}}
+%%}
+%%\def\nostarpart[#1]#2{
+%%	\thispagestyle{pagestyle_chapter}
+%%	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{Part X\\ \sffamily #2}}}}
+%%	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.5\heightofhw}}
+%%	\parbox{\titlewidth}{
+%%  		\stdpart[{#1}]{{\sffamily #2}}
+%%  	}\\[1cm]
+%%  	\sectionmark{#2}
+%%}
+%%\makeatother
+%%
+%%%redefinition of section(sffamily)
+%%\makeatletter
+%%\renewcommand \thesection {\sffamily\@arabic\c@section}
+%%\let\stdsection\section
+%%\renewcommand*\section{%
+%%  \@ifstar{\starsection}{\@dblarg\nostarsection}}
+%%\newcommand*\starsection[1]{\stdsection*{{\sffamily #1}}}
+%%\def\nostarsection[#1]#2{\stdsection[{#1}]{{\sffamily #2}}}
+%%\makeatother
+%%
+%%%redefinition of subsection(sffamily)
+%%\makeatletter
+%%\let\stdsubsection\subsection
+%%\renewcommand*\subsection{%
+%%  \@ifstar{\starsubsection}{\@dblarg\nostarsubsection}}
+%%\newcommand*\starsubsection[1]{\stdsubsection*{{\sffamily #1}}}
+%%\def\nostarsubsection[#1]#2{\stdsubsection[{#1}]{{\sffamily #2}}}
+%%\makeatother
+%%
+%%%redefinition of subsubsection(sffamily)
+%%\makeatletter
+%%\let\stdsubsubsection\subsubsection
+%%\renewcommand*\subsubsection{%
+%%  \@ifstar{\starsubsubsection}{\@dblarg\nostarsubsubsection}}
+%%\newcommand*\starsubsubsection[1]{\stdsubsubsection*{{\sffamily #1}}}
+%%\def\nostarsubsubsection[#1]#2{\stdsubsubsection[{#1}]{{\sffamily #2}}}
+%%\makeatother
+%%
+%%\makeatletter
+%%\@addtoreset{section}{part}
+%%\makeatother
+%%
+%%\renewcommand\thepart{\sffamily\arabic{part}}
+%%\renewcommand\thesection{\thepart.\arabic{section}}
+%%\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+%%
+%%\makeatletter
+%%\renewcommand*\l@section{\@dottedtocline{1}{2.2em}{1.9em}}
+%%\renewcommand*\l@subsection{\@dottedtocline{2}{4.2em}{2.7em}}
+%%\renewcommand*\l@subsubsection{\@dottedtocline{3}{6.9em}{3.6em}}
+%%\makeatother

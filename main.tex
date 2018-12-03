@@ -1,0 +1,61 @@
+\documentclass[a4paper,11pt,titlepage,twoside]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+
+\usepackage{subfig}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage{bibentry}
+\nobibliography*
+
+\newcommand{\Author}{Tomáš Vintr}
+\newcommand{\AuthorTitle}{Ing.}
+\newcommand{\Title}{Warped Hypertime,\\[0.2em] the Tool for Long-Term Autonomy}
+\newcommand{\Supervisor}{Ing. Tomáš Krajník, Ph.D.}
+
+
+%% definice pouziteho vzoru %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{src/doc_head}
+
+\begin{document}
+%% uvodni stranka %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\TitlePage{\Author}{\Title}
+%% stranka se zadanim prace %%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\mbox{} \newpage
+%\input{src/intro}
+%\newpage
+
+%%% obsah %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+\mbox{} \newpage
+
+\pagestyle{pagestyle_text}
+\pagenumbering{arabic}
+
+%% VLASTNI PRACE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setlength{\parskip}{0.5em plus0.2em minus0.2em}
+
+\input{src/introduction.tex}
+\newpage
+\input{src/sota.tex}
+\newpage
+\input{src/contrib.tex}
+\newpage
+\input{src/plan.tex}
+
+\input{src/conclusion.tex}
+
+%% literatura %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\renewcommand{\refname}{References}
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+%%
+%%%% appendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+%\input{src/appendix_A}
+
+\end{document}
