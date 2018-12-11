@@ -221,15 +221,42 @@ The quality of the model is based on two parameters, the number of clusters and 
 To find proper parameters, we create models with different parameters and chose the one with minimal overall differences between $\rho\left(\mathbf{b}_{k},t_{k}\right)$ and $v_{k}$.
 However, we did not find any elegant heuristic to estimate these parameters.
 
-In the recent research we used a different approach that does not need the assumption, that the measured values $R\left(\mathbf{x}_i, t_i\right)$ are integers:
-\begin{enumerate}
-    \item Create histogram $\mathbf{H}$ with bins of volume $b$,
-    \item project $\left(\mathbf{b}_{k}, t_{k}\right)$ into ${}^{@}\mathbf{b}_{k}$,
-    \item apply k-nearest neighbors regression \cite{altman1992introduction} as implemented in Scikit-learn \cite{scikit-learn}.
-\end{enumerate}
+%In the recent research we used a different approach that does not need the assumption, that the measured values $R\left(\mathbf{x}_i, t_i\right)$ are integers:
+%\begin{enumerate}
+%    \item Create histogram $\mathbf{H}$ with bins of volume $b$,
+%    \item project $\left(\mathbf{b}_{k}, t_{k}\right)$ into ${}^{@}\mathbf{b}_{k}$,
+%    \item apply k-nearest neighbors regression \cite{altman1992introduction} as implemented in Scikit-learn \cite{scikit-learn}.
+%\end{enumerate}
 %
-Althought this model needs also two parameters, the set of chosen periodicities and number of neighbors to use for kneighbors queries, preliminary test indicate similar or better prediction power of gained models with lower computational time than earlier method.
+%Althought this model needs also two parameters, the set of chosen periodicities and number of neighbors to use for kneighbors queries, preliminary test indicate similar or better prediction power of gained models with lower computational time than earlier method.
 
+
+\begin{figure}[!t]
+\begin{center}
+    \includegraphics[width=1.0\columnwidth]{fig/ours3_hist_fremen.pdf}
+    \caption{Comparison of predictive power of different methods. 
+The graph shows the reduction of the prediction error compared to the \textit{Mean} model, which neglects the temporal properties of the people presence.
+The indicated values ($y$-axes) are calculated using (\ref{eq:ratio}). 
+On the $x$ axis, there are cell sizes or basic volumes.
+White bar shows the prediction power of the proposed method using three clusters, grey bar Hist and black bar FreMEn.\label{graph:pedestrians}}
+\end{center}
+\end{figure}
+
+\begin{table}[!b]
+\caption{Memory Efficiency of Compared Methods}
+\label{tab:ram}
+%\resizebox{1.0\textwidth}{!}{%
+\centering{
+\begin{tabular}{ccccc}
+\hline
+\begin{tabular}[c]{@{}c@{}}resolution\\ {[}cm x cm{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}proposed method\\ c = 3, @ = 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}FreMEn\\ f = 5\end{tabular} & \begin{tabular}[c]{@{}c@{}}Hist\\ h = 24\end{tabular} & Mean      \\ \hline
+100 x 100                                                          & 1.7 KiB                                                                & 1.1 MiB                                                & 19.3 KiB                                              & 3.3 KiB   \\
+50 x 50                                                            & 1.7 KiB                                                                & 4.4 MiB                                                & 307.3 KiB                                             & 12.9 KiB  \\
+20 x 20                                                            & 1.7 KiB                                                                & 27.2 MiB                                               & 1.9 MiB                                               & 80.1 KiB  \\
+10 x 10                                                            & 1.7 KiB                                                                & 108.9 MiB                                              & 7.7 MiB                                               & 320.1 KiB \\ \hline
+\end{tabular}%
+}
+\end{table}
 
 \subsubsection{Conclusion}
 
@@ -248,33 +275,6 @@ To better visualize the comparison of prediction capabilities of different metho
 \begin{equation}\label{eq:ratio}
 ratio = 1 - \frac{RMSD_{method}}{RMSD_{Mean}}.
 \end{equation}
-
-\begin{figure}
-\begin{center}
-    \includegraphics[width=1.0\columnwidth]{fig/ours3_hist_fremen.pdf}
-    \caption{Comparison of predictive power of different methods. 
-The graph shows the reduction of the prediction error compared to the \textit{Mean} model, which neglects the temporal properties of the people presence.
-The indicated values ($y$-axes) are calculated using (\ref{eq:ratio}). 
-On the $x$ axis, there are cell sizes or basic volumes.
-White bar shows the prediction power of the proposed method using three clusters, grey bar Hist and black bar FreMEn.\label{graph:pedestrians}}
-\end{center}
-\end{figure}
-
-\begin{table}[]
-\caption{Memory Efficiency of Compared Methods}
-\label{tab:ram}
-%\resizebox{1.0\textwidth}{!}{%
-\centering{
-\begin{tabular}{ccccc}
-\hline
-\begin{tabular}[c]{@{}c@{}}resolution\\ {[}cm x cm{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}proposed method\\ c = 3, @ = 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}FreMEn\\ f = 5\end{tabular} & \begin{tabular}[c]{@{}c@{}}Hist\\ h = 24\end{tabular} & Mean      \\ \hline
-100 x 100                                                          & 1.7 KiB                                                                & 1.1 MiB                                                & 19.3 KiB                                              & 3.3 KiB   \\
-50 x 50                                                            & 1.7 KiB                                                                & 4.4 MiB                                                & 307.3 KiB                                             & 12.9 KiB  \\
-20 x 20                                                            & 1.7 KiB                                                                & 27.2 MiB                                               & 1.9 MiB                                               & 80.1 KiB  \\
-10 x 10                                                            & 1.7 KiB                                                                & 108.9 MiB                                              & 7.7 MiB                                               & 320.1 KiB \\ \hline
-\end{tabular}%
-}
-\end{table}
 ... end ... 
 
 
@@ -285,3 +285,54 @@ The downside of this approach is its ...copy form icra ... computational complex
 While FreMEn calculates a temporal model of all the grid cells in less than a minute, our method built the spatio-temporal model in an hour (CPU Intel Core i7-5005U).
 ... end ...
 
+
+\subsection{Complex Control Experiments}
+
+\begin{itemize}
+    \item T.~Krajnik, T.~Vintr, S.~Molina, J.~P. Fentanes, G.~Cielniak, and T.~Duckett, ``Warped hypertime representations for long-term autonomy of mobile robots,'' \emph{arXiv preprint arXiv:1810.04285}, 2018.
+    \item T.~Krajn{\'i}k, M.~Hanheide, T.~Vintr, K.~Kusumam, and T.~Duckett, ``Towards automated benchmarking of robotic experiments,'' in \emph{ICRA Workshop on  Reproducible Research in Robotics}, 2017.
+\end{itemize}
+
+In \cite{krajnik2018warped} we hypothesise that projection of the time-space into the warped hypertime space, and modelling spatio-temporal phenomena using clustering methods leads to more precise models compared to the discrete method
+s.
+The idea behind this hypothesis lies in the assumption that the continuous model takes into consideration dependencies between
+ the surroundings not only in the temporal \cite{tipaldi2013lifelong,rosen2016towards,kucner2013conditional,krajnik2017fremen} but also spatial meaning.
+We created a set of four scenarios experiments \cite{krajnik2017towards}, which can be useful for task scheduling and planning~\cite{mudrova2015integrated}.
+These experiments evaluate the predictive power of tested methods in the same way, and the evaluation tool is prepared for
+ comparing different methods, that can be uploaded by any researcher from the robotic community \cite{krajnik2017towards}.
+
+The list of scenarios is as follows:
+\begin{enumerate}
+    \item the door state
+    \begin{itemize}
+        \item a binary variable that indicate whether the doors are opened or closed during ten weeks,
+        \item the methods have to predict the door state in the chosen times,
+    \end{itemize}
+    \item the topological localisation
+    \begin{itemize}
+        \item a large set of binary variables, each indicates visibility of selected point of interest from the $8000$ images,
+        \item the methods have to predict the most probably visible points of interest in the specific times,
+    \end{itemize}
+    \item the velocity prediction
+    \begin{itemize}
+        \item a continuous variable, which indicates the time the robot needs to traverse a path in the human populate
+d area,
+        \item the methods have to predict the time to traverse the path in specific times,
+    \end{itemize}
+    \item and the human presence
+    \begin{itemize}
+        \item a three-dimensional variable, which indicates human detection (binary part) on the two-dimensional surface (two dimensional continuous part),
+        \item the methods have to predict the frequency of people in the specific time and area.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Conclusion}
+
+Based on the experiments described in the \cite{krajnik2018warped}, we can say that the methods using warped hypertime on the one-dimensional time series are not performing better than FreMEn.
+However, it seems that in the more complex scenarios, like the human presence experiment, the predictive power of the warped hypertime based methods start to excel.
+It should be noted, that even prediction of anomalous behaviour [mesas] using one-dimensional binary variable was
+enough complex scenario to prove better prediction power of the WHyTe.
+
+To prove the hypothesis that warped hypertime space methods will predict better than discrete ones, we need to create more scenarios using more complex variables.
+In these days we are working on the new, better-controlled dataset of human presence in cooperation with "the French university".
+Moreover, we are preparing new scenarios from other sources.
