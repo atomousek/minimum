@@ -100,7 +100,7 @@ To prove the concept of multiple circles extension we chose to:
 \end{itemize}
 We call the projection of time into the multiple circles Warped Hypertime, WHyTe.
 
-\subsubsection{Creation of Warped Hypertime in Detail}
+\subsubsection{Creation of Warped Hypertime in Detail}\label{sec:whyte}
 
 ... copy from mesas ...
 Let us have time series $R\left(t_{i}\right)$, $i = 1 \ldots n$, where $R\left(t_{i}\right) = 1$ when the sensor detects an occurrence of the studied phenomenon and $R\left(t_{i}\right) = 0$ otherwise.
@@ -172,7 +172,7 @@ The dataset consists of the human detections at the T-shaped junction over three
 We divided the dataset to the training part, consisting of two weeks of measurement and the test part consisting of two days from another week.
 The model was then compared in the power of prediction to the known state of the art method FreMEn and histogram, which is the most popular approach in the robotics.
 
-\subsubsection{Warped Hypertime Space in Detail}
+\subsubsection{Warped Hypertime Space in Detail}\label{sec:whytes}
 
 Neglecting spatial parts $\mathbf{x}_{i}$ of vectors $\left(\mathbf{x}_i, t_i\right)$, we can analyze periodicities of time series $R\left(t_{i}\right) = R\left(\mathbf{x}_i, t_i\right)$ according to the (\ref{eq:components}) and gain periods $T_{\tau}$ ordered by their influences.
 ...copy from icra...
@@ -194,7 +194,7 @@ and ${}^{0}\mathbf{x}_{i} = \mathbf{x}_{i},$ ${}^{1}\mathbf{x}_{i} = \left(\math
 ...end ...
 
 
-\subsubsection{Resolution and Model of Frequencies}
+\subsubsection{Resolution and Model of Frequencies}\label{sec:resolution}
 
 The volume $b$ of the basic element of the space-time has to be chosen accordingly to the purposes of the model (for example $1$ squared meter hour $[m^{2}h]$). 
 Then we can create histogram $\mathbf{H}$ with bins of volume $b$.
@@ -209,7 +209,7 @@ Using the histogram $\mathbf{H}$, we modelled frequencies of measured phenomenon
     \item calculate cluster weights $\alpha_{c}$ as
 \begin{equation}
     \alpha_{c} = \frac{\sum_{i}u_{i, c}}{\sum_{k}u_{k, c}}
-\end{equation}
+\end{equation}\label{eqn:cluster_weights}
     \item than function
 \begin{equation}\label{eqn:distribution}
     \rho\left(\mathbf{x}_{0},t_{0}\right) = \sum_{j=1}^{c}{\alpha_j\,u_{0j}{}^{@}\mathbf{x}_{0}}

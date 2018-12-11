@@ -1,36 +1,52 @@
-\section{Expected challenges, research objectives, and dissertation plan}
+\section{Research objectives and dissertation plan}
 
+This research aims to create a tool based on the warped hypertime projection for the complex control of the autonomous robot in the dynamic, human populated environment.
+Such an environment includes changes in 
+\begin{itemize}
+    \item the structure derived from open or closed doors,
+    \item the number of presented people,
+    \item the visual conditions due to the natural cycles,
+    \item the dominant directions of flow of people,
+    \item the occupancy of different areas by people, and so on.
+\end{itemize}
+The prediction of different phenomena and adaption of the robot to the actual state leads to the better performance of the accomplishing of robot tasks \cite{hawes2017strands}.
+However, different predictions of different variables based on the different scenarios lead to different machine learning tasks.
+Therefore we want to define the ways, how to use different classes of machine learning methods using warped hypertime:
 \begin{enumerate}
     \item Frequency Analysis
     \begin{itemize}
-        \item Hyper Time (Space) with chosen resolution (musim doplnit info o rozliseni) - solved, odkaz
-        \item missing values handling - solved, odkaz (taky to tam asi budu muset dodat)
-        \item frequency of measurements function - solved, odkaz
+        \item Hyper Time (Space) with chosen resolution creation (sec. \ref{sec:resolution}),
+        \item the frequency of measurements function (\ref{eqn:distribution}),
+        \item with missing values handling (\ref{eqn:cluster_weights}), (\ref{eq:components}),
     \end{itemize}
     \item Binary Classification
     \begin{itemize}
-        \item Hyper Time (Space) - very probably solved (no resolution needed)
-        \item suitable method for binary classification
-        \item outliers handling - solved
+        \item Hyper Time (Space) creation (sec. \ref{sec:whyte}, \ref{sec:whytes}),
+        \item suitable method for binary classification,
+        \item including outliers handling [mesas] (Figure \ref{graph:mathew90}),
     \end{itemize}
     \item Multiclass Classification
     \begin{itemize}
-        \item Hyper Time (Space) - (dummy variables?)
-        \item suitable method for multiclass classification
-        \item outliers handling
+        \item Hyper Time (Space) creation,
+        \item suitable method for multiclass classification,
+        \item with outliers handling,
     \end{itemize}
     \item Regression
     \begin{itemize}
-        \item Hyper Time (Space) with chosen resolution - very probably solved
-        \item missing values handling - (mean in WHyTeS cells?)
-        \item suitable method for regression - (decision tree regression?)
-        \item outlier handling
+        \item Hyper Time (Space) creation (sec. \ref{sec:whyte}, \ref{sec:whytes}),
+        \item suitable method for regression,
+        \item with outlier handling.
     \end{itemize}
-    \item Planned Datasets
-    \begin{itemize}
-        \item long term spatial human detection on the 24/7 basis - in progress
-        \item navigation maps in changing outdoor environment
-    \end{itemize} 
 \end{enumerate}
+
+We also plan to collect a set of datasets of different phenomena to apply these methods, including:
+\begin{itemize}
+    \item the long term spatial human detection on the 24/7 basis (in progress),
+    \item the navigation maps in changing outdoor environment (in progress),
+    \item the long term spatio-directional human detections [MALL, pripadne KUCNER],
+    \item the long term person presence locations \cite{krajnik2015s},
+    \item and the long term open/closed door detection \cite{krajnik2014long}.
+\end{itemize} 
     
         
+
