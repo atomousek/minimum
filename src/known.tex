@@ -25,15 +25,16 @@ In \cite{vintr2017spatiotemporal} we proposed a concept of modelling human activ
 We hypothesised that there are some patterns of human behaviour over the timeline.
 As these patterns are derived from the routines and habits of humans, these patterns show periodical and continuous nature.
 We also hypothesised that there are no or negligible trends in these patterns due to the nature of human habits. 
-Let us consider these examples to explain periodicity and continuity of human behaviour:
+%Let us consider these examples to explain periodicity and continuity of human behaviour:
+Let us consider these examples form [mesas] to explain periodicity and continuity of human behaviour:
 
-... copy from mesas ...
+%... copy from mesas ...
 \begin{itemize}
     \item the human  behaviour is very similar during every morning as opposed to the difference in behaviour during morning and afternoon of one randomly chosen day,
     \item human behaviour five minutes before midnight and five minutes after midnight could be probably very similar, although we compare behaviour in two different days,
     \item contrary to that, human behaviour during Sunday afternoon is probably different from behaviour on Monday afternoon.
 \end{itemize}
-... end ...
+%... end ...
 
 Such a periodical behaviour is not only forced by natural physical demands like fatigue or hunger, but also by social demands like regular working hours or the compulsory education system. 
 
@@ -53,12 +54,12 @@ By this projection we solve two issues:
 
 To prove this concept we used data of human positions during two days collected at the corridors of the School of Computer Science at the University of Lincoln.
 
-... copy from pair ...
+%... !!! copy from pair ...
 Data collection was performed by a mobile robot equipped with a Velodyne 3d laser range-finder.
 The robot was placed at a T-shaped junction so that its laser range-finder was able to scan the three connecting corridors simultaneously.
 To detect and localise people in the 3d point clouds provided by the scanner, we used an efficient and reliable person detection method~\cite{yan2017online}.
 Each day contains approximately $28000$ entries, which correspond to hundreds of people walking or standing in the monitored corridors.
-... end ...
+%... !!! end ...
 
 The dataset consists of vectors $\left(x, y, t\right)$.
 For the sake of simplicity we chose only one periodicity $T = 86400 s$ (one day), and project these vectors into the extended vector space in this way: $\left(x, y, t\right) \rightarrow \left(x, y, \cos\frac{2\pi t}{T}, \sin\frac{2\pi t}{T}\right)$.
@@ -98,22 +99,44 @@ To prove the concept of multiple circles extension we chose to:
 	\item analyse the time series of human detections consisting of values one (human present) and zeros (human not present) over $18$ weeks, 
 	\item and compare our approach to the FreMEn, the Frequency Map Enhancement method \cite{krajnik2017fremen} specially developed to model binomial time series, and Prophet \cite{taylor2018forecasting}, the open source, time series analysis tool created by Facebook.
 \end{itemize}
-We call the projection of time into the multiple circles Warped Hypertime, WHyTe.
+%We call the projection of time into the multiple circles Warped Hypertime, WHyTe.
 
 \subsubsection{Creation of Warped Hypertime in Detail}\label{sec:whyte}
 
-... copy from mesas ...
-Let us have time series $R\left(t_{i}\right)$, $i = 1 \ldots n$, where $R\left(t_{i}\right) = 1$ when the sensor detects an occurrence of the studied phenomenon and $R\left(t_{i}\right) = 0$ otherwise.
-Then we use the spectral analysis to find periodicities in the data. Specifically, we will use the method derived from the Frequency Map Enhancement \cite{krajnik2017fremen}.
-This method is suitable to analyse time series with binary data, and it is robust to missing values.
+%... copy from mesas ...
+%Let us have time series $R\left(t_{i}\right)$, $i = 1 \ldots n$, where $R\left(t_{i}\right) = 1$ when the sensor detects an occurrence of the studied phenomenon and $R\left(t_{i}\right) = 0$ otherwise.
+%Then we use the spectral analysis to find periodicities in the data. Specifically, we will use the method derived from the Frequency Map Enhancement \cite{krajnik2017fremen}.
+%This method is suitable to analyse time series with binary data, and it is robust to missing values.
+%For every considered period $T_{\tau}$, $\tau = 1 \ldots \Upsilon$, corresponding to the frequency ${f}_{\tau} = 1 / T_{\tau}$ we calculate a component of the frequency spectrum
+%
+%\begin{equation}\label{eq:components}
+%\gamma_{\tau} = \frac{1}{n} \sum_{i = 1}^{n} (R\left(t_{i}\right)-\mu)e^{(-1j)t_{i}{f}_{\tau}2\pi},
+%\end{equation}
+%
+%\noindent where $\mu = \frac{1}{n} \sum_{i = 1}^{n} R\left(t_{i}\right)$, sort them in descending order and return corresponding periods ordered accordingly.
+%... end ...
+%
+%For every chosen period $T_{\tau}$ and for each $t_i$ of the original measured data we can create $2d$ warped hypertime (Fig.~\ref{fig:hypertime}) as follows:
+%
+%\begin{equation}
+%t_i \rightarrow \left(\cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{T_{\tau}}}\right),
+%\end{equation}
+%%
+%where warped hypertime $\left(\cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{T_{\tau}}}\right)$ forms a circle in $2d$ plane which represent the periodicity and continuity of the occurences.
+%The time values of occurrences and non-occurrences with the similar position relative to periodicity $T_{\tau}$ are projected on the similar position on the circle.
+%
+
+SEM PRIDAT OBRAZEK OD KEREMA
+
+Let us have time series $R\left(t_{i}\right)$, $i = 1 \ldots n$, where $R\left(t_{i}\right) = 1$ for detected and $R\left(t_{i}\right) = 0$ for not detected occurrence of the studied phenomenon in the time $t_{i}$.
+Then we apply the spectral decomposition method derived from the Frequency Map Enhancement \cite{krajnik2017fremen} on this time series to find prominent spectral components.
 For every considered period $T_{\tau}$, $\tau = 1 \ldots \Upsilon$, corresponding to the frequency ${f}_{\tau} = 1 / T_{\tau}$ we calculate a component of the frequency spectrum
 
 \begin{equation}\label{eq:components}
-\gamma_{\tau} = \frac{1}{n} \sum_{i = 1}^{n} (R\left(t_{i}\right)-\mu)e^{(-1j)t_{i}{f}_{\tau}2\pi},
+\gamma_{\tau} = \frac{1}{n} \sum_{i = 1}^{n} (R\left(t_{i}\right)-M\left(t_{i}\right))e^{(-1j)t_{i}{f}_{\tau}2\pi},
 \end{equation}
 
-\noindent where $\mu = \frac{1}{n} \sum_{i = 1}^{n} R\left(t_{i}\right)$, sort them in descending order and return corresponding periods ordered accordingly.
-... end ...
+\noindent where $M\left(t_{i}\right)$ is the actual model of the time series (for no previous model, $M\left(t_{i}\right)$ is the estimation of the expected value: $M\left(t_{i}\right) = \mu = \frac{1}{n} \sum_{i = 1}^{n} R\left(t_{i}\right)$), sort them in descending order and return corresponding periods ordered accordingly.
 
 For every chosen period $T_{\tau}$ and for each $t_i$ of the original measured data we can create $2d$ warped hypertime (Fig.~\ref{fig:hypertime}) as follows:
 
@@ -133,8 +156,11 @@ Such projection of $t_i$ will be denoted ${}^{@}\mathbf{t}_{i},$ where:
 %
 in particular ${}^{2}\mathbf{t}_{i} =\left({}^{1}\mathbf{t}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_2}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_2}}}\right) =  \left(\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_2}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_2}}}\right),$ and
 ${}^{1}\mathbf{t}_{i} = \left(\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}\right)$.
+We call the projection of time into the multiple circles Warped Hypertime, WHyTe.
 
+\subsection{Clustering over WhyTe}
 
+DODAT
 
 \subsubsection{Conclusion}
 \begin{figure}[htb]
@@ -165,8 +191,8 @@ The primary hypothesis is that it is possible to extend the space with the warpe
 We call this projection warped hypertime space, WHyTeS. 
 We also hypothesize that model of frequencies over the hypertime space is less memory consuming than methods based on the grid.
 
-To create a model of frequencies, it necessary to define a basic element of space-time above which is the unit frequency calculated. 
-The volume of the basic elements directly defines the resolution of the method.
+%To create a model of frequencies, it necessary to define a basic element of space-time above which is the unit frequency calculated. 
+%The volume of the basic elements directly defines the resolution of the method.
 To prove the concept of multiple time circles extension of the space, we create the model over the dataset collected at the corridors of the School of Computer Science at the University of Lincoln.
 The dataset consists of the human detections at the T-shaped junction over three weeks.
 We divided the dataset to the training part, consisting of two weeks of measurement and the test part consisting of two days from another week.
@@ -174,10 +200,30 @@ The model was then compared in the power of prediction to the known state of the
 
 \subsubsection{Warped Hypertime Space in Detail}\label{sec:whytes}
 
+%Neglecting spatial parts $\mathbf{x}_{i}$ of vectors $\left(\mathbf{x}_i, t_i\right)$, we can analyze periodicities of time series $R\left(t_{i}\right) = R\left(\mathbf{x}_i, t_i\right)$ according to the (\ref{eq:components}) and gain periods $T_{\tau}$ ordered by their influences.
+%...copy from icra...
+%Once we have identified and chose the dominant period $T_{\tau}$, we can extend the space with two extra dimensions.
+%For each $\left(\mathbf{x}_i, t_i\right)$ of the original measured data in space-time, we calculate its projection into the space extended by warped hypertime as follows:
+%
+%\begin{equation}
+%\left(\mathbf{x}_i, t_i\right) \rightarrow \left(\mathbf{x}_i, \cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{T_{\tau}}}\right),
+%\end{equation}
+%%
+%During the iterative process we can extend the extended vector space with another two dimensions and create a more dimensional warped hypertime extension of the space. 
+%Such projection of the measurements $\mathbf{x}_i$ obtained at time $t_i$ will be denoted ${}^{@}\mathbf{x}_{i},$ where:
+%%
+%\begin{equation}\label{eqn:extension}
+%    {}^{@+1}\mathbf{x}_{i} = \left({}^{@}\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_{@+1}}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_{@+1}}}}\right),
+%\end{equation}
+%%
+%and ${}^{0}\mathbf{x}_{i} = \mathbf{x}_{i},$ ${}^{1}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}\right),$ ${}^{2}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_2}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_2}}}\right),$ etc.
+%...end ...
+
+Let us have spatio-temporal detections of occurrences and non-occurrences $\left(\mathbf{x}_i, t_i\right)$.
 Neglecting spatial parts $\mathbf{x}_{i}$ of vectors $\left(\mathbf{x}_i, t_i\right)$, we can analyze periodicities of time series $R\left(t_{i}\right) = R\left(\mathbf{x}_i, t_i\right)$ according to the (\ref{eq:components}) and gain periods $T_{\tau}$ ordered by their influences.
-...copy from icra...
-Once we have identified and chose the dominant period $T_{\tau}$, we can extend the space with two extra dimensions.
-For each $\left(\mathbf{x}_i, t_i\right)$ of the original measured data in space-time, we calculate its projection into the space extended by warped hypertime as follows:
+We chose the dominant period $T_{\tau}$ and extend the space with two new dimensions.
+Then we project every measurement $\left(\mathbf{x}_i, t_i\right)$ into the new vector space as follows:
+%...copy from icra...
 
 \begin{equation}
 \left(\mathbf{x}_i, t_i\right) \rightarrow \left(\mathbf{x}_i, \cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{T_{\tau}}}\right),
@@ -191,10 +237,54 @@ Such projection of the measurements $\mathbf{x}_i$ obtained at time $t_i$ will b
 \end{equation}
 %
 and ${}^{0}\mathbf{x}_{i} = \mathbf{x}_{i},$ ${}^{1}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}\right),$ ${}^{2}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_2}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_2}}}\right),$ etc.
-...end ...
+%...end ...
+
 
 
 \subsubsection{Resolution and Model of Frequencies}\label{sec:resolution}
+
+%The volume $b$ of the basic element of the space-time has to be chosen accordingly to the purposes of the model (for example $1$ squared meter hour $[m^{2}h]$). 
+%Then we can create histogram $\mathbf{H}$ with bins of volume $b$.
+%Spatio-temporal positions of bins are defined by vectors $\left(\mathbf{b}_{k}, t_{k}\right)$, where $k$ are meaningful indices.
+%Vectors $\left(\mathbf{b}_{k}, t_{k}\right)$ should lie inside the area of bin, preferably in the spatio-temporal centers of bins.
+%The values $v_{k}$ connected to each bin are than calculated as a sum of values $R\left(\mathbf{x}_i, t_i\right)$ assigned to every $\left(\mathbf{x}_i, t_i\right)$ that lies inside of the volume of the corresponding bin.
+%Using the histogram $\mathbf{H}$, we modelled frequencies of measured phenomenon per chosen volume unit $b$ as follows:
+%\begin{enumerate}
+%    \item Assumming that every measure $R\left(\mathbf{x}_i, t_i\right)$ is one or zero,  apply a clustering method to ${}^{@}\mathbf{x}_{i}$ for every $\left(\mathbf{x}_i, t_i\right) : R\left(\mathbf{x}_i, t_i\right) = 1 $,
+%    \item calculate centroids $\mathbf{c}_c$ and covariance matrices $\Sigma_{c}$ of every cluster, and membership $u_{i, c}$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster, where $c$ is index of clusters,
+%    \item using $\mathbf{c}_c$ and $\Sigma_{c}$ calculate membership $u_{k, c}$ of every ${}^{@}\mathbf{b}_{k}$ to every cluster,
+%    \item calculate cluster weights $\alpha_{c}$ as
+%\begin{equation}
+%    \alpha_{c} = \frac{\sum_{i}u_{i, c}}{\sum_{k}u_{k, c}}
+%\end{equation}\label{eqn:cluster_weights}
+%    \item than function
+%\begin{equation}\label{eqn:distribution}
+%    \rho\left(\mathbf{x}_{0},t_{0}\right) = \sum_{j=1}^{c}{\alpha_j\,u_{0j}{}^{@}\mathbf{x}_{0}}
+%\end{equation}
+%estimates frequency of measured phenomenon in the neighbourhood with volume $b$ around $\left(\mathbf{x}_0, t_0\right)$.
+%\end{enumerate}
+%%
+%The quality of the model is based on two parameters, the number of clusters and the set of chosen periodicities to create the hyper time.
+%To find proper parameters, we create models with different parameters and chose the one with minimal overall differences between $\rho\left(\mathbf{b}_{k},t_{k}\right)$ and $v_{k}$.
+%However, we did not find any elegant heuristic to estimate these parameters.
+
+%In the recent research we used a different approach that does not need the assumption, that the measured values $R\left(\mathbf{x}_i, t_i\right)$ are integers:
+%\begin{enumerate}
+%    \item Create histogram $\mathbf{H}$ with bins of volume $b$,
+%    \item project $\left(\mathbf{b}_{k}, t_{k}\right)$ into ${}^{@}\mathbf{b}_{k}$,
+%    \item apply k-nearest neighbors regression \cite{altman1992introduction} as implemented in Scikit-learn \cite{scikit-learn}.
+%\end{enumerate}
+%
+%Althought this model needs also two parameters, the set of chosen periodicities and number of neighbors to use for kneighbors queries, preliminary test indicate similar or better prediction power of gained models with lower computational time than earlier method.
+
+
+To create a model of frequencies, we have to estimate the parameters of the mixture of distributions.
+We used EM GMM.
+
+Tim jsme ziskali nejake parametry, ale jeden z nich nikoli, takze jsme to museli normalizovat, aby bylo mozne posoudit, zda je ten model korektni... mno, budu to muset nejak promyslet.
+
+It is also necessary to define a basic element of space-time above which is the unit frequency calculated. 
+The volume of the basic elements directly defines the resolution (granularity) of the method.
 
 The volume $b$ of the basic element of the space-time has to be chosen accordingly to the purposes of the model (for example $1$ squared meter hour $[m^{2}h]$). 
 Then we can create histogram $\mathbf{H}$ with bins of volume $b$.
@@ -204,7 +294,7 @@ The values $v_{k}$ connected to each bin are than calculated as a sum of values 
 Using the histogram $\mathbf{H}$, we modelled frequencies of measured phenomenon per chosen volume unit $b$ as follows:
 \begin{enumerate}
     \item Assumming that every measure $R\left(\mathbf{x}_i, t_i\right)$ is one or zero,  apply a clustering method to ${}^{@}\mathbf{x}_{i}$ for every $\left(\mathbf{x}_i, t_i\right) : R\left(\mathbf{x}_i, t_i\right) = 1 $,
-    \item calculate centroids $\mathbf{c}_c$ and covariance matrices $\Sigma_{c}$ of every cluster, and membership $u_{i, c}$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster, where $c$ is index of clusters,
+    \item using clustering method, calculate centroids $\mathbf{c}_c$ and covariance matrices $\Sigma_{c}$ of every cluster, and membership $u_{i, c}$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster, where $c$ is index of clusters,
     \item using $\mathbf{c}_c$ and $\Sigma_{c}$ calculate membership $u_{k, c}$ of every ${}^{@}\mathbf{b}_{k}$ to every cluster,
     \item calculate cluster weights $\alpha_{c}$ as
 \begin{equation}
@@ -220,15 +310,6 @@ estimates frequency of measured phenomenon in the neighbourhood with volume $b$ 
 The quality of the model is based on two parameters, the number of clusters and the set of chosen periodicities to create the hyper time.
 To find proper parameters, we create models with different parameters and chose the one with minimal overall differences between $\rho\left(\mathbf{b}_{k},t_{k}\right)$ and $v_{k}$.
 However, we did not find any elegant heuristic to estimate these parameters.
-
-%In the recent research we used a different approach that does not need the assumption, that the measured values $R\left(\mathbf{x}_i, t_i\right)$ are integers:
-%\begin{enumerate}
-%    \item Create histogram $\mathbf{H}$ with bins of volume $b$,
-%    \item project $\left(\mathbf{b}_{k}, t_{k}\right)$ into ${}^{@}\mathbf{b}_{k}$,
-%    \item apply k-nearest neighbors regression \cite{altman1992introduction} as implemented in Scikit-learn \cite{scikit-learn}.
-%\end{enumerate}
-%
-%Althought this model needs also two parameters, the set of chosen periodicities and number of neighbors to use for kneighbors queries, preliminary test indicate similar or better prediction power of gained models with lower computational time than earlier method.
 
 
 \begin{figure}[!t]
