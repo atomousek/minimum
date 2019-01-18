@@ -55,46 +55,46 @@ The time-dependent events (that match the periodicity) projected into the corres
 This projection reflects our concept that human behaviour in the morning is similar at the different days, the temperature in the night is lower than in the day, and that the situation changes insignificantly during the midnight contrary to the hike change of the day number.
 The measured phenomenon projected into this vector space can be then analysed using standard statistical and machine learning tools.
 
-\subsection{intro slovensko}
-
-Due to the recent improvements in computational hardware and rapid advances in artificial intelligence and machine learning, society expects that intelligent robots will be soon available to help people in their daily tasks. 
-The robots are supposed to work in diverse conditions for long periods and assist humans not only in the repetitive tasks but also in the tasks where humans are inefficient due to their slow reactions, low dexterity, or emotional stress.
-Robots are also supposed to be helpful in the tasks, where long-term concentration is needed or where the low frequency of actions is in contrast to the necessity of rapid and precise reaction when these events occur.
-Moreover, due to the massive data flow and progress in the databases, autonomous systems are now understood as knowledge holders that can help inexperienced humans to make qualified decisions in unusual situations.
-
-Nowadays, robots can efficiently and autonomously operate in controlled, structured or known.
-However, apart from industrial plants, which are already designed for robots, most environments are neither accurately structured or exactly known.
-To deal with that, a significant effort in robotics was aimed at the problem of mapping, where a robot, supervised or operated by a human, creates a model of its operational environment using its sensors.
-In this way, a robot can turn an unknown environment into a known one, which allows to deploy it in spaces, which are not apriori known.
-However, most of the world is not static, and the presence of changes causes the created model to become obsolete over time.
-This makes the long-term autonomous operation of intelligent robots in changing environments difficult.
-
-The problem of long-term operation in environments that change over time was typically addressed in the context of robot mapping and self-localisation, see~\cite{cadena2016past,kunze2018artificial}.
-Some of these methods aimed at removal of changing aspects of the environment~\cite{lowry2016supervised}, or simply tried to update the models according to the changes observed~\cite{biber2009experimental,churchill2013experience}.
-Other teams tried to learn from the changes observed, and they attempted to model the persistence~\cite{tipaldi2013lifelong,rosen2016towards}, periodicity~\cite{krajnik2017fremen} or effect~\cite{neubert2015superpixel} of the changes.
-The STRANDS project~\cite{hawes2017strands} applied the Frequency Map Enhancement (FreMEn) method~\cite{krajnik2017fremen} to the environmental models that their robot used. 
-This allowed the robot to explicitly model the periodic components of the environmental dynamics and make long-term predictions about of the human behaviour in the deployment area.
-During a four-month deployment of the robot at a care home, the project demonstrated that the predictive ability of the aforementioned temporal model results in gradual improvement of the robot efficiency over time. 
-One of the main problems encountered in the project was the robots inefficiency when navigating near or around humans~\cite{hebesberger2017patterns}.
-
-The most popular environmental model in robotics is the occupancy grid \cite{elfes1989using}, which is used both for localisation and motion planning.
-Thus, most spatio-temporal models build their spatial representations on the occupancy grid paradigm.
-In \cite{kucner2013conditional}, the authors model the typical direction of change in every cell based on the previous and next position of the measured phenomenon in the neighbour of the cell. 
-Another model can be found in \cite{wang2014modeling}, where authors predict the path of the measured phenomenon based on the actual situation in the grid using the input-output Markov model.
-The long-term model of the changes in the occupancy grid is based on the spectral analysis of changes of occupancy in every cell during the long period \cite{krajnik2017fremen}.
-The authors then extended this spatio-temporal model to be able to predict also the direction of the movement through the cell in the specific time \cite{molina2018modelling}.
-
-However, the occupancy grid is memory consuming, and it results in quantisation noise, and therefore, methods that model the space in a continuous domain were developed~\cite{o2012gaussian}.
-Although the continuous models are computationally intensive to build and maintain, using specific optimisations can be used to speed up the model building, so that they could, in theory, be applied in robotics~\cite{ramos2016hilbert}
-For example, the authors of \cite{kucner2013conditional} showed that using continuous models build by expectation-maximisation methods allows to model movement of crowds and the flow of the wind \cite{kucner2017enabling}.
-They also showed that the model of the movement of people could be used to improve the efficiency and safety of navigation \cite{palmieri2017kinodynamic}.
-
-The STRANDS project~\cite{hawes2017strands} indicated that the periodicities of human habits (sleep, going to work) are dominant compared to month-long trends, and modelling the periodicities is beneficial for robots.
-As in the case of spatial models, authors like~\cite{chinellato2017incremental} show that using continuous models of time periodicity results in better performance than dividing the timeline in arbitrary intervals, e.g. hour of a day or day of a week.
-
-Inspired by the success of using periodic models of time to represent environment changes and by the efficiency of continuous models, we propose a specific transformation of the time domain intended to represent long-term dynamics of human-populated environments. 
-To keep the temporal model continuous, while representing the periodicities, we project the time into a set of circles, where every circle is derived from the periodicity detected in the measured phenomenon.
-This projection causes the time-dependent events with the same periodicity to be projected into the same areas of a circle that corresponds to the modelled periodicity.
-The measured phenomenon projected into this vector space can be then analysed using standard statistical and machine learning tools.
-This projection reflects the concept that human behaviour in the morning of different days is more similar that in the morning and afternoon of the same day although the same day afternoon and morning is temporally closer than mornings of two different days. 
-The continuous nature of the model also reflects the fact that a given phenomenon does not change abruptly during midnight although 23:59 and 0:01 appear to be distant. 
+%\subsection{intro slovensko}
+%
+%Due to the recent improvements in computational hardware and rapid advances in artificial intelligence and machine learning, society expects that intelligent robots will be soon available to help people in their daily tasks. 
+%The robots are supposed to work in diverse conditions for long periods and assist humans not only in the repetitive tasks but also in the tasks where humans are inefficient due to their slow reactions, low dexterity, or emotional stress.
+%Robots are also supposed to be helpful in the tasks, where long-term concentration is needed or where the low frequency of actions is in contrast to the necessity of rapid and precise reaction when these events occur.
+%Moreover, due to the massive data flow and progress in the databases, autonomous systems are now understood as knowledge holders that can help inexperienced humans to make qualified decisions in unusual situations.
+%
+%Nowadays, robots can efficiently and autonomously operate in controlled, structured or known.
+%However, apart from industrial plants, which are already designed for robots, most environments are neither accurately structured or exactly known.
+%To deal with that, a significant effort in robotics was aimed at the problem of mapping, where a robot, supervised or operated by a human, creates a model of its operational environment using its sensors.
+%In this way, a robot can turn an unknown environment into a known one, which allows to deploy it in spaces, which are not apriori known.
+%However, most of the world is not static, and the presence of changes causes the created model to become obsolete over time.
+%This makes the long-term autonomous operation of intelligent robots in changing environments difficult.
+%
+%The problem of long-term operation in environments that change over time was typically addressed in the context of robot mapping and self-localisation, see~\cite{cadena2016past,kunze2018artificial}.
+%Some of these methods aimed at removal of changing aspects of the environment~\cite{lowry2016supervised}, or simply tried to update the models according to the changes observed~\cite{biber2009experimental,churchill2013experience}.
+%Other teams tried to learn from the changes observed, and they attempted to model the persistence~\cite{tipaldi2013lifelong,rosen2016towards}, periodicity~\cite{krajnik2017fremen} or effect~\cite{neubert2015superpixel} of the changes.
+%The STRANDS project~\cite{hawes2017strands} applied the Frequency Map Enhancement (FreMEn) method~\cite{krajnik2017fremen} to the environmental models that their robot used. 
+%This allowed the robot to explicitly model the periodic components of the environmental dynamics and make long-term predictions about of the human behaviour in the deployment area.
+%During a four-month deployment of the robot at a care home, the project demonstrated that the predictive ability of the aforementioned temporal model results in gradual improvement of the robot efficiency over time. 
+%One of the main problems encountered in the project was the robots inefficiency when navigating near or around humans~\cite{hebesberger2017patterns}.
+%
+%The most popular environmental model in robotics is the occupancy grid \cite{elfes1989using}, which is used both for localisation and motion planning.
+%Thus, most spatio-temporal models build their spatial representations on the occupancy grid paradigm.
+%In \cite{kucner2013conditional}, the authors model the typical direction of change in every cell based on the previous and next position of the measured phenomenon in the neighbour of the cell. 
+%Another model can be found in \cite{wang2014modeling}, where authors predict the path of the measured phenomenon based on the actual situation in the grid using the input-output Markov model.
+%The long-term model of the changes in the occupancy grid is based on the spectral analysis of changes of occupancy in every cell during the long period \cite{krajnik2017fremen}.
+%The authors then extended this spatio-temporal model to be able to predict also the direction of the movement through the cell in the specific time \cite{molina2018modelling}.
+%
+%However, the occupancy grid is memory consuming, and it results in quantisation noise, and therefore, methods that model the space in a continuous domain were developed~\cite{o2012gaussian}.
+%Although the continuous models are computationally intensive to build and maintain, using specific optimisations can be used to speed up the model building, so that they could, in theory, be applied in robotics~\cite{ramos2016hilbert}
+%For example, the authors of \cite{kucner2013conditional} showed that using continuous models build by expectation-maximisation methods allows to model movement of crowds and the flow of the wind \cite{kucner2017enabling}.
+%They also showed that the model of the movement of people could be used to improve the efficiency and safety of navigation \cite{palmieri2017kinodynamic}.
+%
+%The STRANDS project~\cite{hawes2017strands} indicated that the periodicities of human habits (sleep, going to work) are dominant compared to month-long trends, and modelling the periodicities is beneficial for robots.
+%As in the case of spatial models, authors like~\cite{chinellato2017incremental} show that using continuous models of time periodicity results in better performance than dividing the timeline in arbitrary intervals, e.g. hour of a day or day of a week.
+%
+%Inspired by the success of using periodic models of time to represent environment changes and by the efficiency of continuous models, we propose a specific transformation of the time domain intended to represent long-term dynamics of human-populated environments. 
+%To keep the temporal model continuous, while representing the periodicities, we project the time into a set of circles, where every circle is derived from the periodicity detected in the measured phenomenon.
+%This projection causes the time-dependent events with the same periodicity to be projected into the same areas of a circle that corresponds to the modelled periodicity.
+%The measured phenomenon projected into this vector space can be then analysed using standard statistical and machine learning tools.
+%This projection reflects the concept that human behaviour in the morning of different days is more similar that in the morning and afternoon of the same day although the same day afternoon and morning is temporally closer than mornings of two different days. 
+%The continuous nature of the model also reflects the fact that a given phenomenon does not change abruptly during midnight although 23:59 and 0:01 appear to be distant. 
