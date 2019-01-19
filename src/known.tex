@@ -282,7 +282,7 @@ Then we project every measurement $\left(\mathbf{x}_i, t_i\right)$ into the new 
 During the iterative process we can extend the extended vector space with another two dimensions and create a more dimensional warped hypertime extension of the space. 
 Such projection of the measurements $\mathbf{x}_i$ obtained at time $t_i$ will be denoted ${}^{@}\mathbf{x}_{i},$ where:
 %
-\begin{equation}\label{eqn:extension}
+\begin{equation}\label{eqn:extensionWHyTeS}
     {}^{@+1}\mathbf{x}_{i} = \left({}^{@}\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_{@+1}}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_{@+1}}}}\right),
 \end{equation}
 %
@@ -346,9 +346,9 @@ Using the histogram $\mathbf{H}$, we modelled frequencies of measured phenomenon
     \item using clustering method, calculate centroids $\mathbf{c}_j$ and covariance matrices $\Sigma_{j}$ of every cluster, and membership $u_{i, j}$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster, where $c$ is index of clusters,
     \item using $\mathbf{c}_j$ and $\Sigma_{j}$ calculate membership $u_{k, j}$ of every ${}^{@}\mathbf{b}_{k}$ to every cluster,
     \item calculate cluster weights $\alpha_{j}$ as
-\begin{equation}
+\begin{equation}\label{eqn:clusterWeights}
     \alpha_{j} = \frac{\sum_{i}u_{i, j}}{\sum_{k}u_{k, j}}
-\end{equation}\label{eqn:cluster_weights}
+\end{equation}
     \item than function
 \begin{equation}\label{eqn:distribution}
     \rho\left(\mathbf{x}_{0},t_{0}\right) = \sum_{j=1}^{c}{\alpha_j\,u_{0j}{}^{@}\mathbf{x}_{0}}
