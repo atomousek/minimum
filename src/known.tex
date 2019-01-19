@@ -1,19 +1,18 @@
-\section{Current contributions}
+\section{Current Contributions}
 
 \subsection{Proof of Concept}
 
-\begin{figure}[!b]
-   \begin{center}
-      \includegraphics[width=0.3\columnwidth]{fig/corridor_0}
-    \hfill
-      \includegraphics[width=0.3\columnwidth]{fig/corridor_1}\\\vspace{5mm}
-      \includegraphics[width=0.3\columnwidth]{fig/corridor_2}
-    \hfill
-      \includegraphics[width=0.3\columnwidth]{fig/corridor_3}
-      \caption{Screen grab from the video available at~\url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
-   \end{center}
-\end{figure}
-
+%\begin{figure}[!b]
+%   \begin{center}
+%      \includegraphics[width=0.3\columnwidth]{fig/corridor_0}
+%    \hfill
+%      \includegraphics[width=0.3\columnwidth]{fig/corridor_1}\\\vspace{5mm}
+%      \includegraphics[width=0.3\columnwidth]{fig/corridor_2}
+%    \hfill
+%      \includegraphics[width=0.3\columnwidth]{fig/corridor_3}
+%      \caption{Screen grab from the video available at~\url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
+%   \end{center}
+%\end{figure}
 
 
 
@@ -51,6 +50,17 @@ By this projection we solve two issues:
 \end{itemize}
 
 \subsubsection{Time Projection in Detail}
+%
+\begin{figure}[!h]
+   \begin{center}
+      \includegraphics[width=0.24\columnwidth]{fig/corridor_0}
+      \includegraphics[width=0.24\columnwidth]{fig/corridor_1}
+      \includegraphics[width=0.24\columnwidth]{fig/corridor_2}
+      \includegraphics[width=0.24\columnwidth]{fig/corridor_3}
+      \caption{Predicted people occurrence over a T-shaped corridor during different parts of the day. Screen grab from the video available at~\url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
+%      \caption{Predicted people occurrence over a T-shaped corridor, see video at \url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
+   \end{center}
+\end{figure}
 
 To prove this concept we used data of human positions during two days collected at the corridors of the School of Computer Science at the University of Lincoln.
 
@@ -451,11 +461,39 @@ d area,
 \end{enumerate}
 
 \subsubsection{Conclusion}
+%
+%\begin{figure}[!h]
+%   \begin{center}
+%      \includegraphics[width=0.24\columnwidth]{fig/door_graph}
+%      \includegraphics[width=0.24\columnwidth]{fig/localisation_graph}
+%      \includegraphics[width=0.24\columnwidth]{fig/nav_graph}
+%      \includegraphics[width=0.24\columnwidth]{fig/ped_graph}
+%      \caption{Predicted people occurrence over a T-shaped corridor during different parts of the day. Screen grab from the video available at~\url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
+%      \caption{Predicted people occurrence over a T-shaped corridor, see video at \url{https://youtu.be/4SW4j7DDxYE}.\label{fig:video}}
+%   \end{center}
+%\end{figure}
 
-Based on the experiments described in the \cite{krajnik2018warped}, we can say that the methods using warped hypertime on the one-dimensional time series are not performing better than FreMEn.
+\begin{figure}[!b]
+   \begin{center}
+      \includegraphics[width=0.45\columnwidth]{fig/door_graph}
+    \hfill
+      \includegraphics[width=0.45\columnwidth]{fig/localisation_graph}\\\vspace{5mm}
+      \includegraphics[width=0.45\columnwidth]{fig/nav_graph}
+    \hfill
+      \includegraphics[width=0.45\columnwidth]{fig/ped_graph}
+    \caption{Four different scenarios for autonomous robot decision-making. We tested five methods: \textit{Mean}, which predicts the average value of measurements over the whole time line in every spatial cell, \textit{Hist}, which predicts average of every hour of the day in every spatial cell, \textit{FreMEn}, which creates temporal model for every spatial cell, \textit{HyT-EM} which creates spatio-temporal model using EM GMM for clustering and brute force to find proper parameters of the model (number of clusters and the dimensionality of the warped hypertime), \textit{HyT-KM} which creates spatio-temporal model using our specialized clustering method and tries to estimate proper parameters of the model (for more details, please see \cite{krajnik2018warped}).\\
+\textbf{Top left:} the prediction of the door state during different weeks,\\
+\textbf{top right:} the prediction of the most probably visible points of interest in the specific times,\\
+\textbf{bottom left:} the prediction of the time to travers the path in the specific times,\\
+\textbf{bottom right:} the prediction of the frequency of people on the T-shaped junction using different resolution - prediction power of \textit{Hist}, \textit{FreMEn}, \textit{HyT-EM} and \textit{HyT-KM} are compared to the prediction power of \textit{Mean} to better visualize the impact of using different methods.
+\label{fig:complexControl}}
+   \end{center}
+\end{figure}
+
+Based on the experiments described in the \cite{krajnik2018warped}, see Figure \ref{fig:complexControl}, we can say that the methods using warped hypertime on the one-dimensional time series are not performing better than FreMEn.
 However, it seems that in the more complex scenarios, like the human presence experiment, the predictive power of the warped hypertime based methods start to excel.
 It should be noted, that even prediction of anomalous behaviour [mesas] using one-dimensional binary variable was
-enough complex scenario to prove better prediction power of the WHyTe.
+enough complex scenario to prove better prediction power of the WHyTe based methods.
 
 To prove the hypothesis that warped hypertime space methods will predict better than discrete ones, we need to create more scenarios using more complex variables.
 In these days we are working on the new, better-controlled dataset of human presence in cooperation with Environment Perception and Autonomous Navigation research group at the Universite de Technologie de Belfort-Montbeliard.
