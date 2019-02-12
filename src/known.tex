@@ -20,33 +20,33 @@
     \item T.~Vintr, S.~Molina, J.~Fentanes, G.~Cielniak, T.~Duckett, and T.~Krajn{\'i}k, ``Spatio-temporal models for motion planning in human-populated environments,'' in \emph{Student Conference on Planning in Artificial Intelligence and Robotics}, 2017.
 \end{itemize}
 
-In \cite{vintr2017spatiotemporal} we proposed a concept of modelling human activities over the time in their natural environment.
+In \cite{vintr2017spatiotemporal} we proposed a concept of modelling human activities over time in their natural environment.
 We hypothesised that there are some patterns of human behaviour over the timeline.
-As these patterns are derived from the routines and habits of humans, these patterns show periodical and continuous nature.
+As these patterns are derived from the routines and habits of humans, they show periodical and continuous nature.
 We also hypothesised that there are no or negligible trends in these patterns due to the nature of human habits. 
 %Let us consider these examples to explain periodicity and continuity of human behaviour:
-Let us consider these examples form [mesas] to explain periodicity and continuity of human behaviour:
+Let us consider these examples form [mesas] to explain the periodicity and continuity of human behaviour:
 
 %... copy from mesas ...
 \begin{itemize}
-    \item the human  behaviour is very similar during every morning as opposed to the difference in behaviour during morning and afternoon of one randomly chosen day,
+    \item human  behaviour is very similar during every morning as opposed to the difference in behaviour during the morning and afternoon of one randomly chosen day,
     \item human behaviour five minutes before midnight and five minutes after midnight could be probably very similar, although we compare behaviour in two different days,
     \item contrary to that, human behaviour during Sunday afternoon is probably different from behaviour on Monday afternoon.
 \end{itemize}
 %... end ...
 
-Such a periodical behaviour is not only forced by natural physical demands like fatigue or hunger, but also by social demands like regular working hours or the compulsory education system. 
+Such periodical behaviour is not only forced by natural physiological demands like fatigue or hunger, but also by social demands like regular working hours or the compulsory education system. 
 
-To create the model of the time-dependent patterns of human behaviour, we need to estimate the parameters of their distribution.
+To create the model of the time-dependent patterns of human behaviour, we need to classify detected events into the statistically describable classes.
 As the timeline is continuous and it is not possible to repeat the experiment at the same time, the timeline is not suitable as a domain for time-dependent feature parameters estimation, especially for rare events.
 The conventional approach to this task, known as time series forecasting, is to divide time-dependent events into three different components - a trend, seasonal and cyclic patterns - and analyse them separately \cite{gould2008forecasting}.
-The cyclic patterns are not predictable changes in the time series, seasonal patterns are the periodical changes, and the trend is continuous growth or decrease of measured values.
-To model human behaviour with the assumption of high periodicity and no trend, but with the accent to the continuity, we not only find and model dominant periodicities but also project timeline into the new multidimensional vector space.
-In particular, we project every chosen periodicity into the $2d$ circle in the way, that every pattern that occurs periodically and matching chosen periodicity projects in the same position in this circle.
-By this projection we solve two issues:
+The cyclic patterns are non-predictable changes in the time series, seasonal patterns are the periodical changes, and the trend is continuous growth or decline of measured values.
+To model human behaviour with the assumption of high periodicity and no trend, but with the accent to the continuity, we not only find and model dominant periodicities but also project timeline into a new multidimensional vector space.
+In particular, we project every chosen periodicity into a $2d$ circle in the way, that every pattern that occurs periodically appears in the same position in this circle.
+By this projection we address two issues:
 \begin{itemize}
     \item the time domain is constrained, and therefore it is possible to estimate distribution parameters of the time-dependent periodical patterns,
-    \item and the continuity is guaranteed.
+    \item and the continuity remains.
 \end{itemize}
 
 \subsubsection{Time Projection in Detail}
@@ -94,7 +94,7 @@ We proved that this concept is functional.
 \begin{figure}[!t]
 \begin{center}
     \includegraphics[width=1.0\columnwidth]{fig/hypertime_graph}
-    \caption{Example of the warped hypertime projection. Positive detections during three days are projected into a warped hypertime with a one day period. The parameters of the distribution of a random time-dependent phenomenon that exhibit a periodic behaviour can be easily estimated [JFSS].\label{fig:hypertime}}
+    \caption{Example of the warped hypertime projection. Positive detections during three days are projected into a warped hypertime with a one day period. The parameters of the distribution of a random time-dependent phenomenon that exhibit a periodic behaviour can be easily estimated, courtesy of [JFSS].\label{fig:hypertime}}
 
 \end{center}
 \end{figure}
@@ -102,7 +102,7 @@ We proved that this concept is functional.
 
 
 The aim of the method presented in [mesas] was to create a model of human behaviour and detect anomalous events. 
-We already showed that it is possible to extend vector space of measured events by one circle, see Fig.~\ref{fig:hypertime}.
+We already showed that it is possible to extend the vector space of measured events by one circle, see Fig.~\ref{fig:hypertime}.
 In this article, we hypothesised that it is possible to extend vector space with multiple circles and model the distribution of patterns matching different periodicities over such vector space.
 To prove the concept of multiple circles extension we chose to: 
 \begin{itemize}
@@ -140,7 +140,7 @@ To prove the concept of multiple circles extension we chose to:
 \begin{figure}[!t]
 \begin{center}
     \includegraphics[width=1.0\columnwidth]{fig/hypertime_graphs_a}
-    \caption{Warped hypertime iterations: The method input are observed occurrences of a given phenomenon over time (top left). Then, a model of the data is established (top right). Then, a dominant frequency of the model error is found by Eq.~\ref{eq:components}, the data points are projected onto a unit circle and their distribution is modelled (bottom left). The model is then compared to the original data again (bottom right) and the process is repeated until the model error keeps decreasing [JFSS].\label{fig:whyte}}
+    \caption{Warped hypertime iterations: The method inputs are observed occurrences of a given phenomenon over time (top left). Then, a model of the data is established (top right). Then, a dominant frequency of the model error is found by Eq.~\ref{eq:components}, the data points are projected onto a unit circle, and their distribution is modelled (bottom left). The model is then compared to the original data again (bottom right) and the process is repeated until the model error keeps decreasing, courtesy of [JFSS].\label{fig:whyte}}
 
 \end{center}
 \end{figure}
@@ -164,7 +164,7 @@ t_i \rightarrow \left(\cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{
 \end{equation}
 %
 where warped hypertime $\left(\cos{\frac{2\pi t_{i}}{T_{\tau}}}, \sin{\frac{2\pi t_{i}}{T_{\tau}}}\right)$ forms a circle in $2d$ plane which represent the periodicity and continuity of the occurences.
-The time values of occurrences and non-occurrences with the similar position relative to periodicity $T_{\tau}$ are projected on the similar position on the circle.
+The time values of occurrences and non-occurrences with a similar position relative to periodicity $T_{\tau}$ are projected on a similar position on the circle.
 
 During the iterative process, we extend the extended vector space with other couples of dimensions.
 Such projection of $t_i$ will be denoted ${}^{@}\mathbf{t}_{i},$ where:
@@ -186,10 +186,10 @@ We assume that there exists a mixture of distribution of the time-dependent even
 To find the model $M(t_{i})$ we apply the Expectation Maximisation algorithm for estimating Gaussian Mixture Models (EM GMM) on the projected time line ${}^{@}\mathbf{t}_{i}$ and create the estimation of of the mixture of the distributions:
 
 \begin{equation}\label{eq:modelWHyTe}
-{}^{@}M({}^{@}\mathbf{t}_{i}) =  \sum_{j=1}^{c}{\alpha_j\,u_{i,j}{}^{@}\mathbf{t}_{i}},
+{}^{@}M({}^{@}\mathbf{t}_{i}) =  \sum_{j=1}^{c}{\alpha_j\,u_{i,j}\left({}^{@}\mathbf{t}_{i}, \mathbf{c}_{j}\right)},
 \end{equation}
 %
-\noindent where $\alpha_{j}$ are cluster weights and $u_{i,j}$ is a membership function dependent on the distance between ${}^{@}\mathbf{t}_{i}$ and the $j$-th cluster centre.
+\noindent where $\alpha_{j}$ are cluster weights and $u_{i,j}$ is a membership function dependent on the distance between ${}^{@}\mathbf{t}_{i}$ and the $j$-th cluster centre $\mathbf{c}_{j}$.
 
 The clustering methods expect that there are only occurrences in the dataset, but in our dataset, there are occurrences, non-occurrences and missing values.
 To overcome the problem of missing values, we created two models, ${}^{@}M^{1}({}^{@}\mathbf{t}_{i})$ and ${}^{@}M^{0}({}^{@}\mathbf{t}_{i})$ of the occurrences and the non-occurrences.
@@ -200,8 +200,10 @@ Than the probability model ${}^{@}M^{*}({}^{@}\mathbf{t}_{i})$ was calculated as
 \end{equation}
 
 Then we have to project values ${}^{@}M^{*}({}^{@}\mathbf{t}_{i})$ into the corresponding positions $t_{i}$ in the time line and create the model $M(t_{i})$ of the time series $R(t_{i})$.
-However, this projection is not straightforward, because the cluster weights $\alpha_{j}$ are meaningful in the warped hypertime but not in the time domain.
-Therefore it is necessary to normalize the projected values ${}^{@}M^{*}({}^{@}\mathbf{t}_{i})$ in the way, that $\sum^{n}_{i=1}{M(t_{i})} = \sum^{n}_{i=1}{R(t_{i})}$ over the training data:
+However, the parameters of the mix of distributions (\ref{eq:modelWHyTe}) are not estimated idealy and therefore 
+%this projection is not straightforward, because the cluster weights $\alpha_{j}$ are meaningful in the warped hypertime but not in the time domain.
+%Therefore 
+it is usually necessary to normalize the projected values ${}^{@}M^{*}({}^{@}\mathbf{t}_{i})$ in the way, that $\sum^{n}_{i=1}{M(t_{i})} = \sum^{n}_{i=1}{R(t_{i})}$ over the training data:
 
 \begin{equation}\label{eq:modelNormalisation}
 M(t_{i}) = \frac{\sum^{n}_{i=1}{R(t_{i})}}{ \sum^{n}_{i=1}{{}^{@}M^{*}({}^{@}\mathbf{t}_{i})}}{}^{@}M^{*}({}^{@}\mathbf{t}_{i}).
@@ -269,7 +271,7 @@ The model was then compared in the power of prediction to the known state of the
 %and ${}^{0}\mathbf{x}_{i} = \mathbf{x}_{i},$ ${}^{1}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}\right),$ ${}^{2}\mathbf{x}_{i} = \left(\mathbf{x}_{i}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_1}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_1}}}, \,\cos{\frac{2\pi t_{i}}{T_{\tau_2}}}, \, \sin{\frac{2\pi t_{i}}{T_{\tau_2}}}\right),$ etc.
 %...end ...
 
-Let us have spatio-temporal detections of occurrences and non-occurrences $\left(\mathbf{x}_i, t_i\right)$.
+Let us have spatio-temporal detections of occurrences and non-occurrences at time $\left(\mathbf{x}_i, t_i\right)$.
 Neglecting spatial parts $\mathbf{x}_{i}$ of vectors $\left(\mathbf{x}_i, t_i\right)$, we can analyze periodicities of time series $R\left(t_{i}\right) = R\left(\mathbf{x}_i, t_i\right)$ according to the (\ref{eq:components}) and gain periods $T_{\tau}$ ordered by their influences.
 We chose the dominant period $T_{\tau}$ and extended the space with two new dimensions.
 Then we project every measurement $\left(\mathbf{x}_i, t_i\right)$ into the new vector space as follows:
@@ -334,24 +336,25 @@ Then we project the probability model values ${}^{@}M({}^{@}\mathbf{x}_{i})$ bac
 
 We have to define a basic element of space-time above which is the unit frequency calculated. 
 The volume $b$ of the basic elements directly defines the resolution (granularity) of the method, and it is necessary to define it according to the purposes of the model.
-For example, choosing $b$ to be equal to $1$ squared meter hour $[m^{2}h]$ means, that the robot can ask, how many people will be probably present during the specific hour on the area of one square meter around the specific position). 
+For example, choosing $b$ to be equal to $1$ squared meter hour $[m^{2}h]$ means, that the robot can ask, how many people will be present during the specific hour on the area of one square meter around the specific position). 
 
 We create histogram $\mathbf{H}$ with bins of volume $b$ over the space-time, where any detection (either positive or negative) occurred.
-Spatio-temporal positions of bins are defined by vectors $\left(\mathbf{b}_{k}, t_{k}\right)$, where $k$ are meaningful indices.
-Vectors $\left(\mathbf{b}_{k}, t_{k}\right)$ should lie inside the area of bin, preferably in the spatio-temporal centers of bins.
-The values $v_{k}$ connected to each bin are than calculated as a sum of values $R\left(\mathbf{x}_i, t_i\right)$ assigned to every $\left(\mathbf{x}_i, t_i\right)$ that lies inside of the volume of the corresponding bin.
+Spatio-temporal positions of bins are defined by dheir centres $\left(\mathbf{b}_{k}, t_{k}\right)$, where $k$ is is a bin index.
+%Vectors $\left(\mathbf{b}_{k}, t_{k}\right)$ should lie inside the area of bin, preferably in the spatio-temporal centers of bins.
+The values $v_{k}$ associated with each bin are than calculated as a sum of values $R\left(\mathbf{x}_i, t_i\right)$ assigned to every $\left(\mathbf{x}_i, t_i\right)$ that lies inside of the volume of the corresponding bin.
 Using the histogram $\mathbf{H}$, we modelled frequencies of measured phenomenon per chosen volume unit $b$ as follows:
 \begin{enumerate}
-    \item Assumming that every measure $R\left(\mathbf{x}_i, t_i\right)$ is one or zero,  apply a clustering method to ${}^{@}\mathbf{x}_{i}$ for every $\left(\mathbf{x}_i, t_i\right) : R\left(\mathbf{x}_i, t_i\right) = 1 $,
-    \item using clustering method, calculate centroids $\mathbf{c}_j$ and covariance matrices $\Sigma_{j}$ of every cluster, and membership $u_{i, j}$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster, where $c$ is index of clusters,
-    \item using $\mathbf{c}_j$ and $\Sigma_{j}$ calculate membership $u_{k, j}$ of every ${}^{@}\mathbf{b}_{k}$ to every cluster,
+    \item Assumming that every measurement $R\left(\mathbf{x}_i, t_i\right)$ is one or zero,  apply a clustering method to ${}^{@}\mathbf{x}_{i}$ for every $\left(\mathbf{x}_i, t_i\right) : R\left(\mathbf{x}_i, t_i\right) = 1 $,
+    \item using a given clustering method, calculate centroids $\mathbf{c}_j$ and covariance matrices $\Sigma_{j}$ of every cluster, and membership $u_{i, j}\left({}^{@}\mathbf{x}_{i}, \mathbf{c}_{j}\right)$ of every ${}^{@}\mathbf{x}_{i}$ to every cluster $\mathbf{c}_{j}$, where $j = 1\ldots c$ is index of clusters,
+    \item using $\mathbf{c}_j$ and $\Sigma_{j}$ calculate membership $u_{k, j}\left({}^{@}\mathbf{b}_{k}, \mathbf{c}_{j}\right)$ of every bin centre projection${}^{@}\mathbf{b}_{k}$ to every cluster $\mathbf{c}_{j}$,
     \item calculate cluster weights $\alpha_{j}$ as
 \begin{equation}\label{eqn:clusterWeights}
-    \alpha_{j} = \frac{\sum_{i}u_{i, j}}{\sum_{k}u_{k, j}}
+    \alpha_{j} = \frac{\sum_{i}u_{i, j}}{\sum_{k}u_{k, j}},
 \end{equation}
+where $\sum_{j}u_{i, j} = 1$,
     \item than function
 \begin{equation}\label{eqn:distribution}
-    \rho\left(\mathbf{x}_{0},t_{0}\right) = \sum_{j=1}^{c}{\alpha_j\,u_{0j}{}^{@}\mathbf{x}_{0}}
+    \rho\left(\mathbf{x}_{0},t_{0}\right) = \sum_{j=1}^{c}{\alpha_j\,u_{0j}\left({}^{@}\mathbf{x}_{0}, \mathbf{c}_{j}\right)}
 \end{equation}
 estimates frequency of measured phenomenon in the neighbourhood with volume $b$ around $\left(\mathbf{x}_0, t_0\right)$.
 \end{enumerate}
@@ -392,7 +395,7 @@ White bar shows the prediction power of the proposed method using three clusters
 
 \subsubsection{Conclusion}
 
-In [icra] we compared prediction power of model of frequencies based on clustering over the warped hypertime space 
+In [icra] we compared prediction power and computational and memory cost of the model of frequencies based on clustering over the warped hypertime space 
 %... !!! copy of icra ... 
 to three other spatio-temporal models. 
 These three models represent the space in a discrete way - in particular, they associate each cell of the spatial 2d grid with a temporal model: 
@@ -421,11 +424,11 @@ FreMEn calculates a temporal model of all the grid cells in less than a minute, 
 
 
 
-\subsection{Complex Control Experiments}
+\subsection{Use Cases in Real Robot Systems}
 
 \begin{itemize}
     \item T.~Krajnik, T.~Vintr, S.~Molina, J.~P. Fentanes, G.~Cielniak, and T.~Duckett, ``Warped hypertime representations for long-term autonomy of mobile robots,'' \emph{arXiv preprint arXiv:1810.04285}, 2018.
-    \item T.~Krajn{\'i}k, M.~Hanheide, T.~Vintr, K.~Kusumam, and T.~Duckett, ``Towards automated benchmarking of robotic experiments,'' in \emph{ICRA Workshop on  Reproducible Research in Robotics}, 2017.
+%    \item T.~Krajn{\'i}k, M.~Hanheide, T.~Vintr, K.~Kusumam, and T.~Duckett, ``Towards automated benchmarking of robotic experiments,'' in \emph{ICRA Workshop on  Reproducible Research in Robotics}, 2017.
 \end{itemize}
 
 In \cite{krajnik2018warped} we hypothesise that projection of the time-space into the warped hypertime space, and modelling spatio-temporal phenomena using clustering methods leads to more precise models compared to the discrete methods.
@@ -456,7 +459,7 @@ d area,
     \item and the human presence
     \begin{itemize}
         \item a three-dimensional variable, which indicates human detection (binary part) on the two-dimensional surface (two dimensional continuous part),
-        \item the methods have to predict the frequency of people in the specific time and area.
+        \item the methods have to predict the frequency of people in a specific time and area.
     \end{itemize}
 \end{enumerate}
 
@@ -493,9 +496,9 @@ d area,
 Based on the experiments described in the \cite{krajnik2018warped}, see Figure \ref{fig:complexControl}, we can say that the methods using warped hypertime on the one-dimensional time series are not performing better than FreMEn.
 However, it seems that in the more complex scenarios, like the human presence experiment, the predictive power of the warped hypertime based methods start to excel.
 It should be noted, that even prediction of anomalous behaviour [mesas] using one-dimensional binary variable was
-enough complex scenario to prove better prediction power of the WHyTe based methods.
+enough complex scenario to prove better prediction power of the \makebox{WHyTe-powered} methods.
 
-To prove the hypothesis that warped hypertime space methods will predict better than discrete ones, we need to create more scenarios using more complex variables.
+To verify the hypothesis that warped hypertime space methods will predict better than discrete ones, we need to create more scenarios using more complex variables.
 In these days we are working on the new, better-controlled dataset of human presence in cooperation with Environment Perception and Autonomous Navigation research group at the Universite de Technologie de Belfort-Montbeliard.
 Moreover, we are preparing new scenarios from other sources.
 
