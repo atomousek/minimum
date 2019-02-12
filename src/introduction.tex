@@ -8,55 +8,55 @@ Moreover, due to the massive data flow and progress in the databases, autonomous
 Nowadays, robots can operate very effectively in the controlled and precisely mapped environment.
 However, the current aim is to make them work in the general environment for a long time.
 Such a general environment evince various irregularities - changes over time as a result of natural processes or human acts.
-These changes of the environment lead to the gradual worsening of the static maps and it is not possible only to change the obsolete static map with the new one \cite{Dayoub2009adaptive}.
+These changes of the environment lead to the gradual worsening of the static maps, and it is not possible only to change the obsolete static map with the new one \cite{Dayoub2009adaptive}.
 The covering of these changes over time into the maps leads not only to the possibility of performing the autonomous tasks for a longer time \cite{biber2009experimental}, \cite{tipaldi2013lifelong}, \cite{kucner2013conditional}, \cite{krajnik2017fremen}, \cite{churchill2013experience}, \cite{konolige2009towards}, \cite{hochdorfer2009towards}
  but also to the better performance \cite{hawes2017strands}, \cite{santos2016lifelong}, \cite{kunze2018artificial}, \cite{santos2017spatio}, \cite{hanheide2017and}.
 
 As it is common in the robotics to model the environment using an occupancy grid \cite{elfes1989using}, it is natural to model changes of the environment over the grid.
 In \cite{kucner2013conditional}, the authors model the typical direction of change in every cell based on the previous and next position of the measured phenomenon in the neighbour of the cell. 
 Another discrete short-term model can be found in \cite{wang2014modeling}, where authors predict the path of the measured phenomenon based on the actual situation in the grid using the input-output Markov model.
-Apart from the modelling the directions of the movement of particles in the environment, the robotic community focuses on modeling the changes of environment over time.
-Very popular approach to model time dependent phenomena is to create seassonal windows (usually one day long) and to model the environment over the different parts of these windows \cite{Van2008Using,Blanke2009Daily}.
-This approach models periodicities in the environment changes, but it is necessary to define the length and the resolutions of windows apriory.
+Apart from modelling the directions of the movement of particles in the environment, the robotic community focuses on modelling the changes of the environment over time.
+A very popular approach to model time-dependent phenomena is to create seasonal windows (usually one day long) and to model the environment over the different parts of these windows \cite{Van2008Using,Blanke2009Daily}.
+This approach models periodicities in the environment change, but it is necessary to define the length and the resolutions of windows a priory.
 The use of the time intervals suffers from the discontinuity at the borders of the intervals, and there is the necessity to overcome this discontinuity \cite{chinellato2017incremental}.
-To surmount this issues, autors of \cite{krajnik2017fremen} suggest to apply the spectral analysis of the time domain on every cell in the occupancy grid. 
+To surmount these issues, authors of \cite{krajnik2017fremen} suggest to apply the spectral analysis of the time domain on every cell in the occupancy grid. 
 They were able to model the long-term changes over the time \cite{Krajnik2014Longterm} in the 3d map\cite{Krajnik2014Froctomap}.
 The authors then extended this spatio-temporal model to be able to predict also the direction of the movement through the cell in the specific time \cite{molina2018modelling}.
-The main problem of this approach is the spatial independence of the neighbouring cells which can be adressed by spatial ordering \cite{Cliff1975Model}.
-Neverless, the spatial ordering has to be predefined apriory and can not be changed during the learning process \cite{Shi2018Machine}.
+The main problem of this approach is the spatial independence of the neighbouring cells which can be addressed by spatial ordering \cite{Cliff1975Model}.
+Nevertheless, the spatial ordering has to be predefined a priory and cannot be changed during the learning process \cite{Shi2018Machine}.
 The necessity to model spatial dependencies in the dynamic environment leads to the idea of continuous representation of the environment.
-Although the continuous models are computationally difficult, the continuous models of the environment changes are beneficial due to their memory efficiency\cite{o2012gaussian}[MESAS].
+Although the continuous models are computationally demanding, the continuous models of the environment changes are beneficial due to their memory efficiency\cite{o2012gaussian}[MESAS].
 Moreover, using specific optimisations may be applied \cite{ramos2016hilbert}.
 
-In \cite{O'Callaghan2011Learning} authors propose to use classical navigational techniques over the occupancy grid, such as potential fields, to define prior directional map, update this map using detected human motions, and transform this map into the continuous map using the Gaussian processes.
-This approach suffers from averaging angles, which can lead to the unwanted resulting angles in cases, when humans travers some position in both directions.
+In \cite{O'Callaghan2011Learning} authors propose to use classical navigational techniques over the occupancy grid, such as potential fields, to define the prior directional map, update this map using detected human motions, and transform this map into the continuous map using the Gaussian processes.
+This approach suffers from averaging angles, which can lead to the unwanted resulting angles in cases when humans traverse some position in both directions.
 In the later work \cite{McCalman2013MultiModal} they improved the update to be able to model multimodal distributions of directions. 
 The authors of \cite{kucner2013conditional} also changed their approach of modelling directions and proposed the continuous map \cite{Kucner2016Tell}.  
-To model speed and direction of people and the flow of the wind  \cite{kucner2017enabling}, they introduced expectation-maximisation method based on the Independent von Mises–Gaussian distribution \cite{roy2012mixture}.
+To model speed and direction of people and the flow of the wind  \cite{kucner2017enabling}, they introduced the expectation-maximisation method based on the Independent von Mises–Gaussian distribution \cite{roy2012mixture}.
 They also showed that the model of the movement of people could be used to effective navigation of the robot through the crowd \cite{palmieri2017kinodynamic}.
-The flow of continuous media was also modeled in \cite{Guizilini2015Nonparametric} by applying Gaussian processes \cite{rasmussen2004gaussian} to the measured data.
-To model periodical nature of the modelled phenomena, authors used frequency analysis to divide dataset into the different subsamples with different periodical properties, and modelled them separately.
-For predicting the influenza epidemic over the United States, which is highly periodic event with periodicity of one year, authors \cite{Senanayake2016Predicting} used specific combination of kernels, one of them was \textit{periodic kernel}.
+The flow of continuous media was also modelled in \cite{Guizilini2015Nonparametric} by applying Gaussian processes \cite{rasmussen2004gaussian} to the measured data.
+To model the periodical nature of the modelled phenomena, authors used frequency analysis to divide the dataset into the different subsamples with different periodical properties and modelled them separately.
+For predicting the influenza epidemic over the United States, which is a highly periodic event with the periodicity of one year, authors \cite{Senanayake2016Predicting} used a specific combination of kernels, one of them was \textit{periodic kernel}.
 Periodic kernel \cite{Tompkins2018Fourier} and its multidimensional variant \cite{Tompkins2018Index} were then optimized in the sense of formerly proposed Hilbert maps \cite{ramos2016hilbert}.
 Hilbert maps were subsequently improved to be sequentially updated \cite{Senanayake2017Bayesian}.
 
-It is of big importance for robot operating in the dynamic human populated environment to build and update the model of its environment during performing tasks, i.e. by exploration.
+It is of vital importance for robot operating in the dynamic human populated environment to build and update the model of its environment during performing tasks, i.e. by exploration.
 The first ever life-long spatio-temporal exploration was designed in \cite{Krajnik2015Lifelong}.
 The authors used their method FreMEn \cite{krajnik2017fremen} to continuously build the map.
 They research different exploration strategies and define the fundamental issue, which they call \textit{exploration versus exploitation dilemma}.
-Authors of \cite{Molina2019Go} used simmilar approach to exploration as in \cite{Krajnik2015Lifelong} and built the spatio-temporal model of directions and velocities of moveing humans.
-In \cite{Duckworth2016Unsupervised} the robot during its task performance classified different types of human behavior in the office by clustering partially observed trajectories of moving humans.
-Operating robot was then able to predict human position in the near future when it encountered him and consequently avoid the occupied places. 
+Authors of \cite{Molina2019Go} used a similar approach to exploration as in \cite{Krajnik2015Lifelong} and built the spatio-temporal model of directions and velocities of moving humans.
+In \cite{Duckworth2016Unsupervised}, the robot during its task performance classified different types of human behaviour in the office by clustering partially observed trajectories of moving humans.
+The operating robot was then able to predict human position in the near future when it encountered him and consequently avoid the occupied places. 
 
 
 
 It is generally assumed that the periodicities of the human habits (sleep, going to work) are dominant compared to any progress or evolution in the horizon of months and probably years, and therefore we can neglect any other influences in the model.
-The need to model spatial dependencies leads to the continuous models.
-Continuous models are also more memory efficient, what is necessary requirement for the ability to store large spatio-temporal maps. 
-Inspired by these ideas and recent advances in the modelling the dynamic environment, we created a projection of the time for the long-term models of the changes in the human populated environment.
+The need to model spatial dependencies leads to continuous models.
+Continuous models are also more memory efficient, which is a necessary requirement for the ability to store large spatio-temporal maps. 
+Inspired by these ideas and recent advances in modelling the dynamic environment, we created a projection of the time for the long-term models of the changes in the human populated environment.
 To model the periodicities with the continuity on the borders of the time intervals, we project the time into the set of circles, where every circle is derived from the periodicity detected in the measured phenomenon.
 The time-dependent events (that match the periodicity) projected into the corresponding circle are placed on the similar positions of that circle.
 This projection reflects our concept that human behaviour in the morning is similar at the different days, the temperature in the night is lower than in the day, and that the situation changes insignificantly during the midnight contrary to the hike change of the day number.
 The measured phenomenon projected into this vector space can be then analysed using standard statistical and machine learning tools.
 
-The ultimate goal of my disertation thesis is to create general tool to model spatio-temporal phenomena useful for robots operating in the large changing area for the long period.
+The ultimate goal of this dissertation thesis is to create a general tool to model spatio-temporal phenomena useful for robots operating in the large changing area for a long period.
