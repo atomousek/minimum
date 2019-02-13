@@ -1,15 +1,15 @@
 \section{Research Objectives and Dissertation Plan}
 
-This research aims to create a tool based on the warped hypertime projection for the complex control of the autonomous robot in the dynamic, human populated environment.
+This research aims to create a universal tool based on the warped hypertime projection for the complex control of the autonomous robot in dynamic, human-populated environments.
 Such an environment includes changes in 
 \begin{itemize}
     \item the structure derived from open or closed doors,
-    \item the number of presented people,
-    \item the visual conditions due to the natural cycles,
-    \item the dominant directions of flow of people,
+    \item the number of people present,
+    \item the visual appearance due to the natural cycles,
+    \item the dominant directions of pedestrian flow,
     \item the occupancy of different areas by people, and so on.
 \end{itemize}
-The prediction of different phenomena and adaption of the robot to the actual state leads to the better performance of the accomplishing of robot tasks \cite{hawes2017strands}.
+The prediction of different phenomena and adaptation of the robot to the actual state leads to better performance of the accomplishing of robot tasks \cite{hawes2017strands}.
 However, different predictions of different variables based on the different scenarios lead to different machine learning tasks.
 Therefore we want to define the ways, how to use different classes of machine learning methods using warped hypertime:
 \begin{enumerate}
@@ -17,13 +17,13 @@ Therefore we want to define the ways, how to use different classes of machine le
     \begin{itemize}
         \item Hyper Time (Space) with chosen resolution creation (sec. \ref{sec:resolution}),
         \item the frequency of measurements function (\ref{eqn:distribution}),
-        \item with missing values handling (\ref{eq:components}), (\ref{eq:probabilityWHyTe}), (\ref{eqn:clusterWeights}),
+        \item handling missing values (\ref{eq:components}), (\ref{eq:probabilityWHyTe}), (\ref{eqn:clusterWeights}),
     \end{itemize}
     \item Binary Classification
     \begin{itemize}
         \item Hyper Time (Space) creation (sec. \ref{sec:whyte}, \ref{sec:whytes}),
         \item suitable method for binary classification,
-        \item including outliers detection [mesas] (Figure \ref{graph:mathew90}),
+        \item including outliers detection \cite{Vintr2018Spatiotemporal} (Figure \ref{graph:mathew90}),
     \end{itemize}
     \item Multiclass Classification
     \begin{itemize}
@@ -48,5 +48,6 @@ We also plan to collect a set of datasets of different phenomena to apply these 
     \item and the long term open/closed door detection \cite{krajnik2014long}.
 \end{itemize} 
     
+Finally, we want to deploy warped hypertime based methods on a real robot.
         
 

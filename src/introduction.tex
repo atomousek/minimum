@@ -29,7 +29,7 @@ The authors then extended this spatio-temporal model to be able to predict also 
 The main problem of this approach is the spatial independence of the neighbouring cells which can be addressed by spatial ordering \cite{Cliff1975Model}.
 Nevertheless, the spatial ordering has to be predefined a priory and cannot be changed during the learning process \cite{Shi2018Machine}.
 The necessity to model spatial dependencies in the dynamic environment leads to the idea of continuous representation of the environment.
-Although the continuous models of the environment changes are computationally demanding, they are beneficial due to their memory efficiency\cite{o2012gaussian}[MESAS].
+Although the continuous models of the environment changes are computationally demanding, they are beneficial due to their memory efficiency\cite{o2012gaussian,Vintr2019Spatio}.
 Moreover, using specific optimisations may be applied \cite{ramos2016hilbert}.
 
 In \cite{O'Callaghan2011Learning} authors propose to use classical navigational techniques over the occupancy grid, such as potential fields, to define the prior directional map, update this map using detected human motions, and transform this map into the continuous map using the Gaussian processes.
@@ -50,6 +50,7 @@ An activity, when a robot decides itself where to go to collect data, is referre
 The first ever life-long spatio-temporal exploration was designed in \cite{Krajnik2015Lifelong}.
 The authors used their method FreMEn \cite{krajnik2017fremen} to continuously build the map.
 They research different exploration strategies and define the fundamental issue, which they call \textit{exploration versus exploitation dilemma} \cite{kulich2016explore}.
+In \cite{santos2016lifelong} they built a fully-fledged $4$d spatio-temporal map and crowned their effort with the life-long spatio-temporal exploration of dynamic environments \cite{santos2017spatio}.
 Authors of \cite{Molina2019Go} used a similar approach to exploration as in \cite{Krajnik2015Lifelong} and built the spatio-temporal model of directions and velocities of moving humans.
 In \cite{Duckworth2016Unsupervised}, the robot during its task performance classified different types of human behaviour in the office by clustering partially observed trajectories of moving humans.
 The operating robot was then able to predict human position in the near future when it encountered him and consequently avoid the occupied places. 
