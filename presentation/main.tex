@@ -1,7 +1,8 @@
-\newcommand{\Subject}{\textcolor{black}{NATO Workshop on Modelling and Simulation for Autonomous Systems}\\{---}\\\LARGE{Spatiotemporal models of human activity for robotic patrolling}}
+\newcommand{\Subject}{\textcolor{black}{Thesis Topics Defence}\\{---}\\\LARGE{Warped Hypertime,\\[0.2em] the Tool for Long-Term Autonomy}}
 \newcommand{\Meeting}{MESAS 2018, Prague}
 \newcommand{\Author}{Tom{\'a}{\v s} Vintr}
-\newcommand{\Authors}{Tom{\'a}{\v s} Vintr, Kerem Eyisoy, Vanda Vintrov{\'a}, Tom{\'a}{\v s} Krajn{\'i}k}
+%\newcommand{\Authors}{Tom{\'a}{\v s} Vintr, Kerem Eyisoy, Vanda Vintrov{\'a}, Tom{\'a}{\v s} Krajn{\'i}k}
+\newcommand{\Authors}{Tom{\'a}{\v s} Vintr}
 \newcommand{\Date}{}
 %\usetheme{warsaw}
 
@@ -9,14 +10,14 @@
 \newcommand{\link}[2]{\href{run:#1}{\includegraphics[width=0.99\textwidth]{#2}}}
 \newcommand{\bib}[3]{\begin{thebibliography}{#1}\bibitem[#1]{#1}{#2}.\newblock{\em #3}\end{thebibliography}}
 
-\newcommand{\Lincoln}{Artificial Intelligence Center, Faculty of Electrical Engineering, Czech Technical University,\\Department of Computer Engineering, Faculty of Engineering, Marmara University,\\Faculty of Informatics and Statistics, University of Economics, Prague}
+\newcommand{\Lincoln}{Artificial Intelligence Center\\Faculty of Electrical Engineering\\Czech Technical University}
 \newcommand{\Institute}{\Lincoln\\}
 
 
 \newcommand{\HeadLineLeft}{Tom{\'a}{\v s} Vintr}
-\newcommand{\HeadLineCenter}{NATO Workshop on Modelling and Simulation for Autonomous Systems}
+\newcommand{\HeadLineCenter}{Thesis Topics Defence}
 \newcommand{\HeadLineRight}{AIC@CTU}
-\newcommand{\FootLineCenter}{Spatiotemporal models of human activity for robotic patrolling}
+\newcommand{\FootLineCenter}{Warped Hypertime, the Tool for Long-Term Autonomy}
 \newcommand{\FootLineLeft}{\insertshortauthor}
 
 \input{inc/head}
@@ -24,293 +25,103 @@
 \title{{\bf \Subject}}
 \usepackage{multirow}
 \begin{document}
-% - frame ---------------------------------------------------------------------
+% - frame 1---------------------------------------------------------------------
 
 \frame{\titlepage}
 
 \begin{frame}
-	\frametitle{Self Learning Autonomous System for Patrolling}
+	\frametitle{SotA in Spatio-temporal Modelling}
     \vspace{3mm}
-    \href{run:./video/Linda patrolling MHT office-_tXOevb51rc.mp4}{\includegraphics[width=0.9\textwidth]{fig/The-robot-Linda-at-Open-space-office-and-Bob-at-office-corridor.png}}
-%    \centering\video{cmds/uvodni_video.sh}\includegraphics[width=0.7\textwidth]{fig/The-robot-Linda-at-Open-space-office-and-Bob-at-office-corridor.png}
-	\begin{center}
-	Towards the ability to understand an human-populated environment.
-	\end{center}
+    \href{run:./video/MorseSpatioTemporalExploration.mp4}{\includegraphics[width=0.9\textwidth]{fig/The-robot-Linda-at-Open-space-office-and-Bob-at-office-corridor.png}}
 \end{frame}
 
 
+% - frame 2---------------------------------------------------------------------
 
-
-
-
-
-% - frame --------------------------------------------------------------------
 \begin{frame}
-   \frametitle{Detection of an Anomalous Behavior}
+	\frametitle{FreMEn - Engine in the Background}
     \vspace{3mm}
-	\begin{columns}
-	%\hfill
-	        \column{0.45\textwidth}
-    \only<1,2,3>{
-	            Standard solution:
-                \begin{enumerate}
-                   \item  Define rules,
-                   \item  hard-code rules,
-                   \item  update rules regularly.
-                \end{enumerate}
-        }
-	        \column{0.45\textwidth}
-    \only<1,2,3>{
-        \invisible<1>{
-	            Problems:
-                \begin{enumerate}
-	                \item  Expert opinion,
-	                \item  different scenarios,
-	                \item  keep software updated.
-                \end{enumerate}
-        }
-    }
-   \end{columns}
-%
-    \only<1,2,3>{
-        \invisible<1>{
-            \centering
-            \includegraphics[width=0.7\textwidth]{fig/become-a-programmer.jpg}
-        }
-    }
-
-    \only<1,2,3>
-        {\invisible<1,2>{
-            \begin{center}
-	            To overcome the aforementioned problems,\\we propose \textbf{self learning} autonomous system.
-            \end{center}
-         }
-    }
+    \href{run:./video/pitch.mkv}{\includegraphics[width=0.9\textwidth]{fig/fremen_backgroung.jpeg}}
 \end{frame}
 
 
-\section{Method}
-% - frame ---------------------------------------------------------------------
+% - frame 3---------------------------------------------------------------------
+
 \begin{frame}
-   \frametitle{Suitable Tools to Model Human Habits}
-        %\item Hist24 - histogram of occurences during day,
-        %\item Hist168 - histogram of occurences during week,
-        %\item Prophet - SOTA in time series forcasting,
-        %\item FreMEn - SOTA in long-term autonomy,
+	\frametitle{WHyTe - Projection of Binary Variable}
     \vspace{3mm}
-    \only<1,2,3,4>{
-        \invisible<1>{
-            \centerline{\href{run:./video/pitch.mkv}{\textbf{FreMEn}} - Frequency Map Enhancement}
-            \begin{itemize}
-                \item State of the Art in Long-Term Robotics,
-                \item can detect and model multiple periodicities in measured phenomenon,
-	            \item successfully deployed in autonomous robot patrolling,
-                \item not meant as a tool to search for outliers.
-            \end{itemize}
+            \includegraphics[width=1.0\textwidth]{fig/hypertime_graphs_a.pdf}
+\end{frame}
+
+
+% - frame 4---------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{WHyTeS - Projection of Vector Variable}
     \vspace{3mm}
-        }
-    }
-    \only<1,2,3, 4>{
-        \invisible<1,2>{
-            \centerline{\textbf{Hist24} and \textbf{Hist168} - histograms of occurences}
-            \begin{itemize}
-                \item Histograms over one day, resp. one week,
-                \item favourite (simple) solution in long-term robotics,
-                \item describe only one predefined periodicity of measured phenomenon.
-            \end{itemize}
-            %\vspace{3mm}
-        }
-    }
-    \only<1,2,3,4>{
-        \invisible<1,2,3>{
-            \centerline{\textbf{Prophet}}
-            \begin{itemize}
-	            \item User friendly tool for time series forcasting from Facebook,
-                \item designed for economic time series.
-            \end{itemize}
-            %\vspace{3mm}
-        }
-    }
-%\href{run:./video/pitch.mkv}{Click for video}
+            \includegraphics[width=0.8\textwidth]{fig/hypertime_space.pdf}
 \end{frame}
 
 
-%\renewcommand{\Author}{Krajnik, Faigl, Vonasek et al.: }
-%\renewcommand{\FootLineCenter}{\textbf{Simple, Yet Stable Bearing only Navigation}. Journal of Field Robotics, 2010}
-% - frame ---------------------------------------------------------------------
+% - frame 5---------------------------------------------------------------------
+
 \begin{frame}
-   \frametitle{Our Solution to Model Human Habits}
-    %\vspace{3mm}
-    \begin{itemize}
-    \only<1,2,3,4>{
-        \invisible<1>{
-            \item Use FreMEn to detect periodicities in human behavior,
-        }
-    }
-    %\vspace{5mm}
-    \only<1,2,3,4>{
-        \invisible<1,2>{
-            \item project timeseries into \textbf{\textcolor{darkred}{\textcolor{red}{W}arped \textcolor{red}{Hy}per\textcolor{red}{T}im\textcolor{red}{e}}},
-
-%\hfill
-        }
-    }
-    \only<1,2,3,4>{
-        \invisible<1,2,3>{
-            \item and model phenomenons using Gaussian mixtures.
-        }
-    }
-
-    \end{itemize}
+	\frametitle{FreMEn Model vs. WHyTe Model}
     \vspace{3mm}
-    \only<1>{
-        \invisible<1>{
-            \includegraphics[width=1.0\textwidth]{fig/hypertime_graph_v2.pdf}
-        }
-    }
-    \only<2>{
-            \includegraphics[width=1.0\textwidth]{fig/hypertime_graph_1.pdf}
-    }
-    \only<3>{
-            \includegraphics[width=1.0\textwidth]{fig/hypertime_graph_2.pdf}
-    }
-    \only<4>{
-            \includegraphics[width=1.0\textwidth]{fig/hypertime_graph_3.pdf}
-    }
+            \includegraphics[width=0.8\textwidth]{fig/outliers_test.pdf}
 \end{frame}
 
 
 
+% - frame 6---------------------------------------------------------------------
 
-% - frame ---------------------------------------------------------------------
 \begin{frame}
-   \frametitle{Outlier Detection}
+	\frametitle{Prediction: WHyTe Power $\doteq$ FreMEn Power}
     \vspace{3mm}
-    \centerline{Outliers:}
-    \begin{itemize}
-        \item Vaguely defined,
-        \item unexpected, inconsistent, suspicious, or rare measurements.
-    \end{itemize}
-    \only<1,2,3>{
-        \invisible<1>{
-    \centerline{Outlier Hypothesis:}
-	\begin{columns}
-	    \column{0.45\textwidth}
-                \begin{itemize}
-                   \item  Detection:
-                   \item  Model:
-                   \item  Significance level:
-                \end{itemize}
-	        \column{0.45\textwidth}
-                \begin{itemize}
-	                \item  model based.
-	                \item  Bernoulli distribution.
-	                \item  $\alpha = 0.1.$%,$ $\alpha = 0.01.$
-                \end{itemize}
-   \end{columns}
-        }
-    }
-    \vspace{5mm}
-   \only<1,2,3>{
-        \invisible<1,2>{
-    \centerline{Measure to Compare Methods:}
-    \begin{itemize}
-        \item Matthews correlation coefficient ( <-1; 1> ).
-    \end{itemize}
-        }
-    }
+\begin{figure}[!b]
+   \begin{center}
+      \includegraphics[width=0.45\columnwidth]{fig/door_graph}
+    \hfill
+      \includegraphics[width=0.45\columnwidth]{fig/localisation_graph}\\\vspace{5mm}
+      \includegraphics[width=0.45\columnwidth]{fig/nav_graph}
+    \hfill
+      \includegraphics[width=0.45\columnwidth]{fig/ped_graph}
+   \end{center}
+\end{figure}
+\end{frame}
+
+
+% - frame 7---------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Memory Efficiency of WHyTeS}
+    \vspace{3mm}
+\begin{table}[!b]
+%\caption{Memory Efficiency of Compared Methods}
+\label{tab:ram}
+%\resizebox{1.0\textwidth}{!}{%
+\centering{
+\begin{tabular}{ccccc}
+\hline
+\begin{tabular}[c]{@{}c@{}}spatial\\cells\end{tabular} & \begin{tabular}[c]{@{}c@{}}WHyTeS\\ c = 3, @ = 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}FreMEn\\ f = 5\end{tabular} & \begin{tabular}[c]{@{}c@{}}Hist\\ h = 24\end{tabular} & Mean      \\ \hline
+400                                                          & 1.7 KiB                                                                & 1.1 MiB                                                & 19.3 KiB                                              & 3.3 KiB   \\
+1600                                                            & 1.7 KiB                                                                & 4.4 MiB                                                & 307.3 KiB                                             & 12.9 KiB  \\
+10000                                                            & 1.7 KiB                                                                & 27.2 MiB                                               & 1.9 MiB                                               & 80.1 KiB  \\
+40000                                                            & 1.7 KiB                                                                & 108.9 MiB                                              & 7.7 MiB                                               & 320.1 KiB \\ \hline
+\end{tabular}%
+}
+\end{table}
 
 \end{frame}
 
 
 
-% - frame ---------------------------------------------------------------------
+% - frame 8---------------------------------------------------------------------
+
 \begin{frame}
-   \frametitle{Experiment Design and Data}
-    \begin{itemize}
-        \item Real world dataset (Lincoln University office),
-        \item twenty weeks of person detection (detected or not),
-        \item training datasets: first day to first three weeks,
-        \item test dataset: eighteenth week,
-        \item manually labeled anomalies in test data.
-        \item methods to compare: Hist24, Hist168, Prophet, FreMEn, WHyTe.
-       \end{itemize}
-%     \centerline{Methods to Compare:}
-%    \begin{itemize}
-%        \item Hist24 - histogram of occurences during day,
-%        \item Hist168 - histogram of occurences during week,
-%        \item Prophet - SOTA in time series forcasting,
-%        \item FreMEn - SOTA in long-term autonomy,
-%        \item WHyTe - proposed method.
-%    \end{itemize}
-
-\hfill\includegraphics[width=0.48\textwidth]{fig/3_weeks.pdf}\hfill\includegraphics[width=0.48\textwidth]{fig/outliers_test.pdf}\hfill
-
-
-\end{frame}
-
-
-
-% - frame ---------------------------------------------------------------------
-\begin{frame}
-   \frametitle{Results, $\alpha = 0.1$}
-    \includegraphics[width=1.0\textwidth]{fig/mathew_graph_90.pdf}
-\end{frame}
-
-
-% - frame ---------------------------------------------------------------------
-%\begin{frame}
-%   \frametitle{Results, $\alpha = 0.01$}
-%    \includegraphics[width=1.0\textwidth]{fig/mathew_graph_99.pdf}
-%\end{frame}
-
-
-
-% - frame ---------------------------------------------------------------------
-\begin{frame}
-   \frametitle{Conclusion}
-    \only<1,2,3>{
-    \centerline{Improvement Proposal:}
-    \begin{itemize}
-        \item The self learning autonomous system to detect anomalous behaviour of humans in their natural environment.
-    \end{itemize}
-    }
-    \only<1,2,3>{
-        \invisible<1>{
-    \centerline{Novelty:}
-    \begin{itemize}
-        \item The projection of time series into \textbf{warped hypertime}.
-    \end{itemize}
-        }
-    }
-    \only<1,2,3>{
-        \invisible<1,2>{
-    \centerline{Qualities:}
-    \begin{itemize}
-        \item Short time to learn,
-        \item long time stability of forecasting,
-        %\item robustness to the significance level choice,
-        %\item reflects innate seassonality and continuity,
-        \item uses usual statistical procedure and methods,
-        \item outperforms State of the Art methods.
-    \end{itemize}
-        }
-    }
-\end{frame}
-
-
-
-% - frame ---------------------------------------------------------------------
-\begin{frame}
-   \frametitle{Future Work}
-		\vfill
-    \begin{itemize}
-        \item Generalize the method to analyze multidimensional data,
-        \item evaluate the method to different scenarios.
-		\vfill
-    \end{itemize}
-    \includegraphics[width=1.0\textwidth]{fig/all.png}
-		\vfill
+	\frametitle{WHyTeS Model Visualisation}
+    \vspace{3mm}
+    \href{run:./video/WHyTeS_visualisation.mp4}{\includegraphics[width=0.7\textwidth]{fig/grzegorz.jpeg}}
 \end{frame}
 
 
