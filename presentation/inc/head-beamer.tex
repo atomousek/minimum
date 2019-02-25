@@ -1,0 +1,129 @@
+% File name: head-beamer.tex
+% Date:      2008/09/28 20:40
+% Author:    Jan Faigl
+
+%\usepackage[latin2]{inputenc}
+%\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{graphicx}
+\usepackage{multimedia}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{textcomp}
+
+\usepackage{listings}
+\usepackage{ragged2e}
+
+\lstset{extendedchars=true}
+\lstset{inputencoding=latin2}
+\lstset{breaklines=true,basicstyle=\tiny,language=sh}
+\lstset{language=java}
+\lstset{columns=fullflexible}
+\definecolor{background_color}{gray}{0.9}
+\definecolor{comment_color}{rgb}{0.0, 0.5, 0.0}
+\definecolor{keyword_color}{rgb}{0.0, 0.0, 1.0}
+\definecolor{string_color}{rgb}{0.8, 0.0, 0.0}
+
+\lstset{keywordstyle=\color{keyword_color}\bfseries}
+\lstset{commentstyle=\color{comment_color}}
+\lstset{stringstyle=\color{string_color}}
+\lstset{basicstyle=\ttfamily}
+\lstset{showstringspaces=false}
+\lstset{keepspaces=true}
+\lstset{tabsize=2}
+\lstset{breaklines=true}
+
+\institute{\Institute}
+
+\date{\Date}
+\author[\Author]{\Authors}
+\newcommand{\disable}[1]{}
+
+\colorlet{redshaded}{red!25!bg}
+\colorlet{shaded}{black!25!bg}
+\colorlet{shadedshaded}{black!10!bg}
+\colorlet{blackshaded}{black!40!bg}
+
+\colorlet{darkred}{red!80!black}
+\colorlet{darkblue}{blue!80!black}
+\colorlet{darkgreen}{green!80!black}
+
+\newcommand{\myurl}[1]{{\color{blue}\url{#1}}}
+
+\DeclareMathOperator{\argmax}{argmax}
+
+\pgfdeclareimage[height=0.4cm]{GL}{fig/gl-logo}
+\pgfdeclareimage[height=1.0cm]{logoGL}{fig/logoGL}
+%\logo{\pgfuseimage{GL}}
+\logo{\pgfuseimage{logoGL}}
+
+\usetheme{Singapore}
+
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{ }
+
+\defbeamertemplate*{part page}{}[1][]{
+\begin{centering}
+   {\usebeamerfont{part name}\usebeamercolor[fg]{part name}Part~\insertromanpartnumber}
+   \vskip1em\par
+   \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
+      \usebeamerfont{part title}\insertpart\par
+   \end{beamercolorbox}
+\end{centering}
+}        
+
+\setbeamerfont{code}{size={\fontsize{11pt}{6pt}}}
+\setbeamerfont{codeSmall}{size={\fontsize{10pt}{6pt}}}
+\setbeamerfont{codeSmaller}{size={\fontsize{9pt}{6pt}}}
+\setbeamerfont{small}{size={\fontsize{8pt}{6pt}}}
+\AtBeginPart{\frame{\partpage}}
+
+
+\setbeamercolor{alerted text}{fg=red!80!black}
+
+%-----------------------------------------------------------------------------
+% Header line
+%-----------------------------------------------------------------------------
+
+\defbeamertemplate*{headline}{}
+{%
+\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+\end{beamercolorbox}
+\hbox{%
+\begin{beamercolorbox}[wd=0.15\paperwidth,ht=2.25ex,dp=1ex,left]{section in head/foot}%
+   \usebeamerfont{title in head/foot}\hspace*{2ex}\HeadLineLeft\hspace*{2ex}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.7\paperwidth,ht=2.25ex,dp=1ex,center]{subsection in head/foot}%
+  \usebeamerfont{subsection in head/foot}\hspace*{2ex}\HeadLineCenter
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.15\paperwidth,ht=2.25ex,dp=1ex,left]{section in head/foot}%
+   \usebeamerfont{section in head/foot}\hspace*{1ex}\HeadLineRight
+\end{beamercolorbox}%
+}
+%\begin{beamercolorbox}{section in head/foot}
+%   \vskip2pt\insertsectionnavigationhorizontal{\paperwidth}{}{}\vskip2pt
+% \end{beamercolorbox}%
+
+\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+\end{beamercolorbox}
+}
+\addtoheadtemplate{\pgfuseshading{beamer@headfade}\vskip-1.25cm}{}
+
+%-----------------------------------------------------------------------------
+% footline
+%-----------------------------------------------------------------------------
+\defbeamertemplate*{footline}{}{
+\leavevmode%
+\hbox{%
+\begin{beamercolorbox}[wd=.22\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+   \usebeamerfont{author in head/foot}\hspace*{2ex}\FootLineLeft\hspace*{2ex}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.68\paperwidth,ht=2.25ex,dp=1ex,center]{institute in head/foot}%
+   \usebeamerfont{title in head/foot}\FootLineCenter
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=0.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+   \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+\end{beamercolorbox}}%
+\vskip0pt%
+}

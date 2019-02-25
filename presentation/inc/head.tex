@@ -1,0 +1,19 @@
+% File name: head.tex
+% Date:      2008/09/28 20:40
+% Author:    Jan Faigl
+
+\newread\testin
+\def\softinput #1 {\let\next=\relax \openin\testin=#1
+\ifeof\testin \message{Info: the file #1 does not exist}%
+\else \closein\testin \def\next{\input #1 }\fi
+\next}
+
+\softinput{makeconfig}
+
+\ifx\print\undefined
+\documentclass[mathserif]{beamer}
+\input{inc/head-beamer}
+\else
+\documentclass[trans]{beamer}
+\input{inc/head-print}
+\fi
