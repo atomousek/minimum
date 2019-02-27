@@ -1,0 +1,103 @@
+Good afternoon,
+
+my name is Tomas Vintr, and I would like to defend here the chosen topic of my doctoral thesis.
+I chose an operational name for the topic: Warped Hypertime, the Tool for Long-Term Autonomy.
+The main aim of my dissertation thesis will be the creation of the method to model spatio-temporal phenomena in the changing environment, especially in the environment populated and actively influenced by humans and their actions.
+This method should be used for scheduling and planning of the autonomous robots operated in such an environment.
+
+--next--1
+
+There exist two dominant approaches to modelling the dynamics of the environment in these days in robotics.
+The first of them creates more or less static maps of the flow of entities or fluid in the operational area.
+The second approach models the changes in the environment as a large set of static maps, which model operational area at specific times.
+During the robot operation, the algorithm chooses the static map that is most suitable for the current time.
+
+The first and, as I know, the only approach to model the changes in the environment as the continuous process was developed during the STRANDS project.
+You can see the visualisation of this 4 dimensional model in this video... click
+
+We can see the 3-dimensional occupancy grid where every cell's state is calculated as the individual time series.
+The state of each cell is modelled as an independent process which leads to obvious anomalies.
+For example, we can see the hole in the head of one of the humans.
+
+--next--2
+The method that models the time series is called FreMEn, and it was used for various robotic tasks, such as localisation, navigation, scheduling and planning.
+
+In the video, we can see the visualisation of the inner processes during localisation.
+There are dominant points of interest gathered from the visual sensor inputs that define the position of the robot on the map.
+The robot can predict, which points of interest should be visible on the position and time of its assumed state.
+We can see the temporal model building of chosen points of interest and their predictions calculation.
+At the end of this video, we can see that the light reflection in the red circle was correctly predicted
+It was detected, even when someone forgot to turn the lights off in the office.
+
+--next--3
+
+The way, we decided to upgrade the existing spatiotemporal model for robotics, was to create a tool that would be able to build a continuous spatiotemporal model.
+
+Our underlying assumptions are these:
+- the human environment is stable in the medium-term period, and therefore it is possible to neglect the trend,
+- human behaviour is based on his habits, and these habits are forced by nature and society to be periodic, and therefore the changes in the human populated environment will evince the periodical nature,
+- the human behaviour at the end and the start of the new periodical interval is similar, and therefore the model should respect that, 
+- the event that occurs influences its spatial neighbourhood, and therefore it is necessary to create a continuous spatio-temporal model.
+
+--next--4
+
+The core of our method lies in the projection of the time domain into the so-called warped hypertime.
+Let us have a binary variable, that shows if measured phenomenon occurred or not.
+The method finds dominant periods in the data.
+In this case, there is an interval of one day.
+We project the time into the circle, that represents the interval of one day, and every occurrence at a similar relative position in the day is projected onto the similar position of the circle.
+Now, it is possible in this closed subset of the vector space to model the mixture of the distributions of the occurrences, even if they are very rare.
+Based on the model in the warped hypertime, we can predict the probability of occurrence of the measured phenomenon in specific times.
+Note, that it is possible to create more dimensional warped hypertime if the method detects other influencing periods.
+
+--next--5
+
+We can go further and model the behaviour of not an only binary variable, but also vector variable.
+On this graph, we can see the model building using warped hypertime space projection.
+There is a one-dimensional numeric variable, whose value changes in the time.
+The method detects the most influencing periodicities, creates warped hypertime and extend the vector space with the new dimensions.
+In this newly created vector space, we can again model the mixture of distributions of occurrences, and create the model.
+We suggest expanding the vector space iteratively to be able to find the proper number of dimensions of the hypertime.
+
+--next--6
+
+So, what is the difference between FreMEn and WHyTe?
+This graph shows the prediction of the human occurrences in his office with labelled anomal behaviour.
+We can see that both, FreMEn and WHyTe, were able to predict the behaviour of the human 15 weeks to the future.
+The difference lies in the construction of the model.
+The FreMEn combines different periodical components, and therefore we can see parasitic waves at the weekend.
+Contrary to that, WhyTe models the working hours very precisely, as it models the distribution of occurrences over the warped hypertime.
+It should be noted, that the tested subject was only once in the office during the weekend.
+One of the anomalies, on Wednesday, it was not even him, but some young couple of scientists.
+
+--next--7
+
+We applied WHyTe method on the different real datasets and compared its prediction power with FreMEn's.
+Our method usually little bit outperformed FreMEn.
+
+--next--8
+
+The main advantage of the proposed method lies in its memory efficiency.
+Contrary to the FreMEn, the volume of the storage needed to save the model created by WHyTe is not dependent on the spatial resolution.
+It only saves the parameters of the mix of distributions and chosen influential periodicities.
+Therefore it is possible to store a model of huge areas with no restrictions to the resolution.
+The disadvantage of the proposed model is its computational demand.
+Where FreMEn was calculated in tens of seconds, Whyte was calculated in tens of minutes.
+
+--next--9
+
+Let us see the warped hypertime space model visualisation.
+During three weeks the robot with the lidar sensor was scanning the corridor in the Lincoln University.
+The data was than preprocessed by the human detection algorithm and then processed by WHyTeS.
+In the video, we can see the prediction of human occurrences for the next two days.
+In the second half, we can see the same model with real occurrences included.
+
+--next--10
+
+This research aims to create a universal tool based on the warped hypertime projection for the complex control of the autonomous robot in dynamic, human-populated environments and to deploy warped hypertime based methods on a real robot.
+
+-next--11
+
+Let me mentioned at the end of this presentation, that we are usually facing problems, when we present and propagate the idea, that human behaviour can be predicted using periodicities.
+It is not unusual to get a review that consists of the statement, that the whole idea is totally out of reality because humanity will never fall back to the dark times. 
+
